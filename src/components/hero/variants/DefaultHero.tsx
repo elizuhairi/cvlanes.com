@@ -11,13 +11,13 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="container mx-auto px-4 text-center relative z-10 py-8 sm:py-12 md:py-16"
+      className="container mx-auto px-4 text-center relative z-10"
     >
-      <div className="text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6">
+      <div className="text-center max-w-4xl mx-auto">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6">
           Hi, I&apos;m Ali Al-Zuhairi
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6 sm:mb-8">
+        <p className="text-xl md:text-2xl text-gray-300 mb-8">
           I&apos;m a designer and developer who loves creating beautiful digital experiences.
         </p>
       </div>
@@ -25,13 +25,13 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1 }}
-        className="mb-6 sm:mb-8 px-4"
+        className="mb-8"
       >
-        <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 animate-gradient">
+        <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 animate-gradient">
           {title}
         </h2>
         {subtitle && (
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-300">{subtitle}</p>
+          <p className="text-xl md:text-2xl text-gray-300">{subtitle}</p>
         )}
       </motion.div>
       
@@ -40,12 +40,11 @@ const DefaultHero: React.FC<HeroConfig> = ({ title, subtitle, quote, cta }) => {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="px-6 sm:px-8"
         >
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto relative">
-            <span className="absolute -left-4 top-0 text-2xl sm:text-3xl text-blue-400">&ldquo;</span>
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto relative">
+            <span className="absolute -left-4 top-0 text-blue-400 text-3xl">&ldquo;</span>
             {quote.text}
-            <span className="absolute -bottom-4 right-0 text-2xl sm:text-3xl text-blue-400">&rdquo;</span>
+            <span className="absolute -bottom-4 right-0 text-blue-400 text-3xl">&rdquo;</span>
             <motion.span 
               className="block text-blue-400 mt-4"
               initial={{ x: -10, opacity: 0 }}
