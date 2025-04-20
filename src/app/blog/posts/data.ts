@@ -221,7 +221,7 @@ export const posts: Post[] = [
       Remember: While we've come a long way from our primitive ancestors, their legacy continues to shape who we are and how we interact with the world around us.
     `,
     author: 'Ali Al-Zuhairi',
-    image: '/images/blog/primitive-human.jpg',
+    image: '/images/blog/aivshuman.jpg',
     tags: ['Evolution', 'Anthropology', 'Human Behavior', 'History'],
     readTime: '5 min read'
   },
@@ -302,7 +302,7 @@ export const posts: Post[] = [
       Remember: While AI continues to advance, it's crucial to maintain a balance between technological progress and human values, ensuring that these tools serve to enhance rather than replace human capabilities.
     `,
     author: 'Ali Al-Zuhairi',
-    image: '/images/blog/claude-ai.jpg',
+    image: '/images/blog/claudevschatgpt.jpg',
     tags: ['Artificial Intelligence', 'Technology', 'Innovation', 'Future'],
     readTime: '6 min read'
   }
