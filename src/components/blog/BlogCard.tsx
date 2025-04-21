@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'next-share';
 import Card from '@/components/Card';
+import { useTheme } from '@/context/ThemeContext';
 
 interface BlogCardProps {
   post: {
@@ -22,11 +23,13 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
   const variant = index % 3 === 0 ? 'primary' : index % 3 === 1 ? 'secondary' : 'tertiary';
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   
   return (
-    <Card variant={variant} className="overflow-hidden">
-      <article className="group relative">
-        <Link href={`/blog/${post.slug}`} className="block">
+    <Card variant={variant} className="overflow-hidden h-full shadow-lg hover:shadow-xl transition-shadow duration-300 w-full">
+      <article className="group relative h-full flex flex-col">
+        <Link href={`/blog/${post.slug}`} className="block flex-grow">
           <div className="relative h-52 -mx-8 -mt-8 mb-6 overflow-hidden">
             <Image
               src={post.image}
@@ -35,14 +38,22 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60" />
+            <div className={`absolute inset-0 ${
+              isLight 
+                ? 'bg-gradient-to-t from-gray-800/40 to-transparent' 
+                : 'bg-gradient-to-t from-black/80 to-transparent'
+            } opacity-60`} />
             
             <div className="absolute bottom-0 left-0 right-0 p-5">
               <div className="flex flex-wrap gap-2 mb-2">
                 {post.tags.slice(0, 2).map((tag, idx) => (
                   <span 
                     key={idx}
-                    className="px-2 py-1 bg-primary/20 text-primary rounded-full text-xs backdrop-blur-sm"
+                    className={`px-2 py-1 ${
+                      isLight 
+                        ? 'bg-primary/10 text-primary' 
+                        : 'bg-primary/20 text-primary'
+                    } rounded-full text-xs backdrop-blur-sm`}
                   >
                     {tag}
                   </span>
@@ -51,9 +62,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
             </div>
           </div>
           
-          <div>
+          <div className="flex flex-col flex-grow">
             <h3 className="text-xl font-semibold mb-2 text-primary group-hover:text-primary-hover transition-colors">{post.title}</h3>
-            <p className="text-theme opacity-70 text-sm mb-3 flex items-center gap-4">
+            <p className={`${isLight ? 'text-gray-600' : 'text-theme opacity-70'} text-sm mb-3 flex items-center gap-4`}>
               <span>{post.publishedDate}</span>
               <span>•</span>
               <span className="flex items-center">
@@ -63,10 +74,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
                 {post.readTime}
               </span>
             </p>
-            <p className="text-theme opacity-80 line-clamp-2 mb-4">{post.description}</p>
+            <p className={`${isLight ? 'text-gray-700' : 'text-theme opacity-80'} line-clamp-2 mb-4 flex-grow`}>{post.description}</p>
             
             <motion.div 
-              className="text-primary font-medium flex items-center"
+              className="text-primary font-medium flex items-center mt-auto"
               whileHover={{ x: 5 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
@@ -83,7 +94,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
             url={`${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/blog/${post.slug}`}
             title={post.title}
           >
-            <div className="bg-theme/50 backdrop-blur-sm p-2 rounded-full hover:bg-theme/70 transition-colors">
+            <div className={`${isLight ? 'bg-white/70' : 'bg-theme/50'} backdrop-blur-sm p-2 rounded-full hover:bg-theme/70 transition-colors`}>
               <TwitterIcon size={20} round />
             </div>
           </TwitterShareButton>
@@ -91,7 +102,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
             url={`${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/blog/${post.slug}`}
             title={post.title}
           >
-            <div className="bg-theme/50 backdrop-blur-sm p-2 rounded-full hover:bg-theme/70 transition-colors">
+            <div className={`${isLight ? 'bg-white/70' : 'bg-theme/50'} backdrop-blur-sm p-2 rounded-full hover:bg-theme/70 transition-colors`}>
               <LinkedinIcon size={20} round />
             </div>
           </LinkedinShareButton>

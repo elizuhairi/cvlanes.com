@@ -167,10 +167,38 @@ body {
   background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
   z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .theme-card-content:hover {
   border-color: var(--card-border-hover);
+}
+
+/* Light theme specific card styling */
+.theme-light .theme-card-content {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.theme-light .theme-card-content:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.theme-light .theme-card-glow {
+  opacity: 0.4;
+}
+
+.theme-light .theme-card-glow-primary {
+  --card-shadow-color: rgba(168, 85, 247, 0.1);
+}
+
+.theme-light .theme-card-glow-secondary {
+  --card-shadow-color: rgba(59, 130, 246, 0.1);
+}
+
+.theme-light .theme-card-glow-tertiary {
+  --card-shadow-color: rgba(124, 58, 237, 0.1);
 }
 
 /* Ensure images stay contained within cards */
@@ -181,4 +209,10 @@ body {
 
 .theme-card .overflow-hidden {
   @apply z-10;
+}
+
+/* Blog cards equal height fix */
+.grid > .flex > .theme-card {
+  height: 100%;
+  width: 100%;
 }
