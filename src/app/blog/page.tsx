@@ -42,7 +42,7 @@ const BlogPage = () => {
           transition={{ duration: 0.8 }}
           className="container mx-auto px-4 relative z-10 text-center"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-start via-mid to-end bg-clip-text text-transparent">
+          <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
             Blog & Insights
           </h1>
           <p className={`text-xl ${isLight ? 'text-gray-700' : 'opacity-80'} max-w-2xl mx-auto mb-10`}>

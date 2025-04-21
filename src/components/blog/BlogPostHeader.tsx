@@ -62,7 +62,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           ))}
         </div>
         
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-start via-mid to-end bg-clip-text text-transparent">{title}</h1>
+        <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${isLight ? 'text-gray-900' : 'text-white'}`}>{title}</h1>
         
         <p className={`text-xl ${isLight ? 'text-gray-700' : 'text-theme opacity-80'} mb-6`}>{description}</p>
         

@@ -86,31 +86,16 @@ const Navigation = () => {
           <motion.h1 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-3xl font-bold relative group"
+            className="text-3xl font-bold relative"
           >
             <Link href="/" className="block">
               <motion.span 
-                className="bg-gradient-to-r from-start via-mid to-end bg-clip-text text-transparent relative z-10 font-extrabold"
-                whileHover={{ scale: 1.05 }}
+                className={`relative ${theme === 'light' ? 'text-gray-900' : 'text-white'} font-extrabold`}
+                whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                style={{
-                  textShadow: theme === 'colorful' ? '0 1px 2px rgba(0,0,0,0.3)' : 'none',
-                  WebkitTextStroke: theme === 'colorful' ? '0.5px rgba(255,255,255,0.1)' : 'none',
-                }}
               >
                 Ali Al-Zuhairi
               </motion.span>
-              <motion.div
-                className="absolute -inset-2 bg-gradient-to-r from-start/30 to-end/30 rounded-lg opacity-0 group-hover:opacity-60 transition-opacity duration-300"
-                animate={{
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-              />
             </Link>
           </motion.h1>
 
