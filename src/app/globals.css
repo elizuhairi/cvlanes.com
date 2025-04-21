@@ -137,12 +137,12 @@ body {
 
 /* Card component styling */
 .theme-card {
-  @apply relative;
+  @apply relative rounded-xl p-[2px];
   transform-style: preserve-3d;
 }
 
 .theme-card-glow {
-  @apply absolute -inset-1 rounded-xl blur-xl transition-all duration-300 opacity-70 group-hover:blur-2xl;
+  @apply absolute -inset-1 rounded-xl blur-xl transition-all duration-300 opacity-70 group-hover:blur-2xl group-hover:opacity-100;
   background: linear-gradient(to right, var(--card-shadow-color), var(--card-shadow-color));
 }
 
@@ -182,11 +182,15 @@ body {
 }
 
 .theme-light .theme-card-content:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
 }
 
 .theme-light .theme-card-glow {
   opacity: 0.4;
+}
+
+.theme-light .theme-card-glow:hover {
+  opacity: 0.6;
 }
 
 .theme-light .theme-card-glow-primary {

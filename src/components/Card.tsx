@@ -61,7 +61,8 @@ const Card: React.FC<CardProps> = ({
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className={`theme-card group ${getShadowClassName()} transform-gpu transition-all ${className}`}
+      className={`theme-card group ${getShadowClassName()} transform-gpu transition-all overflow-hidden ${className}`}
+      whileHover={hoverEffect ? { scale: 1.01 } : {}}
     >
       {/* Glow effect that changes with theme */}
       <div className={getGlowClassName()} />
