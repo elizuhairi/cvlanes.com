@@ -156,7 +156,7 @@ export default function CollaborationClient() {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="theme-card-content p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
+                    className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
                   >
                     {item.icon}
                     <h3 className="text-xl font-semibold text-primary mb-2">{item.phase}</h3>
@@ -169,88 +169,86 @@ export default function CollaborationClient() {
             {/* Research Findings */}
             <motion.section variants={fadeInUp} className="mb-16">
               <h2 className="text-3xl font-bold mb-6 text-primary">Research Insights</h2>
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg p-8 backdrop-blur-sm">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-xl font-semibold text-primary mb-6">Participant Feedback</h3>
-                    <div className="space-y-6">
-                      {[
-                        { label: "Creativity Value", value: 90 },
-                        { label: "User-Friendliness", value: 95 },
-                        { label: "Color Approval", value: 80 },
-                        { label: "Accessibility", value: 85 }
-                      ].map((metric, index) => (
-                        <motion.div
-                          key={index}
-                          className="relative pt-1"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-opacity-80">{metric.label}</span>
-                            <span className="text-primary font-semibold">{metric.value}%</span>
-                          </div>
-                          <div className="overflow-hidden h-2 text-xs flex rounded-full bg-gray-700">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: `${metric.value}%` }}
-                              transition={{ duration: 1, ease: "easeOut" }}
-                              className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary"
-                            />
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
+                  <h3 className="text-xl font-semibold text-primary mb-6">Participant Feedback</h3>
+                  <div className="space-y-6">
+                    {[
+                      { label: "Creativity Value", value: 90 },
+                      { label: "User-Friendliness", value: 95 },
+                      { label: "Color Approval", value: 80 },
+                      { label: "Accessibility", value: 85 }
+                    ].map((metric, index) => (
+                      <motion.div
+                        key={index}
+                        className="relative pt-1"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-opacity-80">{metric.label}</span>
+                          <span className="text-primary font-semibold">{metric.value}%</span>
+                        </div>
+                        <div className="overflow-hidden h-2 text-xs flex rounded-full bg-gray-700">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${metric.value}%` }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                            className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary"
+                          />
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-primary mb-6">Key Recommendations</h3>
-                    <div className="space-y-4">
-                      {[
-                        {
-                          title: "Enhanced Accessibility",
-                          description: "Add clear labels to all icons and images",
-                          icon: (
-                            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                          )
-                        },
-                        {
-                          title: "Keyboard Navigation",
-                          description: "Improve focus states and keyboard shortcuts",
-                          icon: (
-                            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10H9m3-3v6m0-6V7" />
-                            </svg>
-                          )
-                        },
-                        {
-                          title: "Color Contrast",
-                          description: "Enhance contrast ratios for better readability",
-                          icon: (
-                            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                            </svg>
-                          )
-                        }
-                      ].map((item, index) => (
-                        <motion.div
-                          key={index}
-                          className="flex items-start space-x-4 p-4 rounded-lg bg-gray-800/30 hover:bg-gray-800/50 transition-colors"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <div className="flex-shrink-0">{item.icon}</div>
-                          <div>
-                            <h4 className="text-lg font-medium text-primary">{item.title}</h4>
-                            <p className="text-opacity-80">{item.description}</p>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
+                </div>
+                <div className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
+                  <h3 className="text-xl font-semibold text-primary mb-6">Key Recommendations</h3>
+                  <div className="space-y-4">
+                    {[
+                      {
+                        title: "Enhanced Accessibility",
+                        description: "Add clear labels to all icons and images",
+                        icon: (
+                          <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Keyboard Navigation",
+                        description: "Improve focus states and keyboard shortcuts",
+                        icon: (
+                          <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10H9m3-3v6m0-6V7" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Color Contrast",
+                        description: "Enhance contrast ratios for better readability",
+                        icon: (
+                          <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                          </svg>
+                        )
+                      }
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        className="theme-card-flex p-4 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <div className="flex-shrink-0">{item.icon}</div>
+                        <div>
+                          <h4 className="text-lg font-medium text-primary">{item.title}</h4>
+                          <p className="text-opacity-80">{item.description}</p>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -290,7 +288,7 @@ export default function CollaborationClient() {
                 ].map((persona, index) => (
                   <motion.div
                     key={index}
-                    className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg p-6 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"
+                    className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
                     whileHover={{ y: -5 }}
                   >
                     <div className="flex items-center mb-6">
@@ -365,7 +363,7 @@ export default function CollaborationClient() {
             {/* Requirements & Testing */}
             <motion.section variants={fadeInUp} className="mb-16">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
+                <div className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
                   <h2 className="text-3xl font-bold mb-6 text-primary">Product Requirements</h2>
                   <div className="space-y-4">
                     {[
@@ -408,7 +406,7 @@ export default function CollaborationClient() {
                     ].map((req, index) => (
                       <motion.div
                         key={index}
-                        className="flex items-start space-x-4 p-4 bg-gray-800/30 rounded-lg hover:bg-gray-800/50 transition-all duration-300"
+                        className="theme-card-flex p-4 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex items-start space-x-4 self-start"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
@@ -426,68 +424,65 @@ export default function CollaborationClient() {
                   </div>
                 </div>
 
-                <div>
+                <div className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105">
                   <h2 className="text-3xl font-bold mb-6 text-primary">User Testing</h2>
-                  <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg p-6">
-                    <div className="mb-8">
-                      <h3 className="text-xl font-semibold text-primary mb-4">Test Scenario</h3>
-                      <div className="p-4 bg-gray-800/30 rounded-lg">
-                        <p className="text-opacity-80">Configure a new device using the prototype</p>
-                      </div>
+                  <div className="mb-8">
+                    <h3 className="text-xl font-semibold text-primary mb-4">Test Scenario</h3>
+                    <div className="theme-card-flex p-4 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 self-start">
+                      <p className="text-opacity-80">Configure a new device using the prototype</p>
                     </div>
+                  </div>
 
-                    <div>
-                      <h3 className="text-xl font-semibold text-primary mb-4">Focus Areas</h3>
-                      <div className="grid grid-cols-2 gap-4">
-                        { [
-                          {
-                            area: "Usability",
-                            icon: (
-                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                              </svg>
-                            )
-                          },
-                          {
-                            area: "Creativity",
-                            icon: (
-                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                              </svg>
-                            )
-                          },
-                          {
-                            area: "Accessibility",
-                            icon: (
-                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                              </svg>
-                            )
-                          },
-                          {
-                            area: "Visual Design",
-                            icon: (
-                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                              </svg>
-                            )
-                          }
-                        ].map((focus, index) => (
-                          <motion.div
-                            key={index}
-                            className="flex flex-col items-center p-4 bg-gray-800/30 rounded-lg hover:bg-gray-800/50 transition-all duration-300"
-                            whileHover={{ scale: 1.05 }}
-                          >
-                            <div className="p-2 bg-primary/10 rounded-lg mb-2">
-                              <div className="text-primary">
-                                {focus.icon}
-                              </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-primary mb-4">Focus Areas</h3>
+                    <div className="grid grid-cols-2 gap-4 grid-flow-row auto-rows-auto">
+                      { [
+                        {
+                          area: "Usability",
+                          icon: (
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                            </svg>
+                          )
+                        },
+                        {
+                          area: "Creativity",
+                          icon: (
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                          )
+                        },
+                        {
+                          area: "Accessibility",
+                          icon: (
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                          )
+                        },
+                        {
+                          area: "Visual Design",
+                          icon: (
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                          )
+                        }
+                      ].map((focus, index) => (
+                        <div
+                          key={index}
+                          className="theme-card-flex p-4 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex flex-col items-center"
+                        >
+                          <div className="p-2 bg-primary/10 rounded-lg mb-2">
+                            <div className="text-primary">
+                              {focus.icon}
                             </div>
-                            <span className="text-opacity-80 text-sm text-center">{focus.area}</span>
-                          </motion.div>
-                        ))}
-                      </div>
+                          </div>
+                          <span className="text-opacity-80 text-sm text-center">{focus.area}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -542,7 +537,7 @@ export default function CollaborationClient() {
                 ].map((item, index) => (
                   <motion.div
                     key={index}
-                    className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-lg p-6 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"
+                    className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
