@@ -129,7 +129,7 @@ const BlogPage = () => {
         </div>
       </section>
 
-      <footer className="bg-theme border-t border-primary/10 text-theme opacity-70 py-8">
+      <footer className="bg-theme text-theme opacity-70 py-8">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
         </div>

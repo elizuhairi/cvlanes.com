@@ -126,43 +126,47 @@ const Navigation = () => {
                 </Link>
               </motion.li>
               <motion.li 
-                className="relative group"
+                className="relative"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                onHoverStart={() => setPortfolioOpen(true)}
-                onHoverEnd={() => setPortfolioOpen(false)}
               >
-                <Link 
-                  href="/portfolio" 
-                  className={`flex items-center space-x-1 transition-colors ${getTextColorClass()}`}
+                <div 
+                  className="inline-block"
+                  onMouseEnter={() => setPortfolioOpen(true)}
+                  onMouseLeave={() => setPortfolioOpen(false)}
                 >
-                  <span>Portfolio</span>
-                  <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
-                    expand_more
-                  </span>
-                </Link>
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ 
-                    opacity: portfolioOpen ? 1 : 0,
-                    y: portfolioOpen ? 0 : 10
-                  }}
-                  transition={{ duration: 0.2 }}
-                  className={`absolute left-0 mt-2 w-64 rounded-lg ${theme === 'light' ? 'bg-white/90' : 'bg-black/90'} backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden`}
-                >
-                  <div className="py-2">
-                    {portfolioDropdownItems.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`block px-4 py-3 ${getTextColorClass()} hover:bg-primary/10 transition-colors`}
-                      >
-                        {item.text}
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
+                  <Link 
+                    href="/portfolio" 
+                    className={`flex items-center space-x-1 transition-colors ${getTextColorClass()}`}
+                  >
+                    <span>Portfolio</span>
+                    <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
+                      expand_more
+                    </span>
+                  </Link>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ 
+                      opacity: portfolioOpen ? 1 : 0,
+                      y: portfolioOpen ? 0 : 10
+                    }}
+                    transition={{ duration: 0.2 }}
+                    className={`absolute left-0 mt-2 w-64 rounded-lg ${theme === 'light' ? 'bg-white/90' : 'bg-black/90'} backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden`}
+                  >
+                    <div className="py-2">
+                      {portfolioDropdownItems.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={`block px-4 py-3 ${getTextColorClass()} hover:bg-primary/10 transition-colors`}
+                        >
+                          {item.text}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
               </motion.li>
               <motion.li 
                 initial={{ opacity: 0, y: -10 }}
