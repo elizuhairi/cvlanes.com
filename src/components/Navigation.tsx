@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ThemeSwitch from './ThemeSwitch';
+import { useTheme } from '@/context/ThemeContext';
 
 const portfolioDropdownItems = [
   { href: '/portfolio/collaboration', text: 'Collaboration & Leadership' },
@@ -12,15 +13,35 @@ const portfolioDropdownItems = [
 
 const Navigation = () => {
   const { scrollY } = useScroll();
+  const { theme } = useTheme();
+  
+  // Use different background colors based on theme
   const backgroundColor = useTransform(
     scrollY,
     [0, 100],
-    ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)"]
+    theme === 'light' 
+      ? ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.8)"] 
+      : ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.8)"]
   );
   const backdropBlur = useTransform(scrollY, [0, 100], ["blur(0px)", "blur(12px)"]);
   const scale = useTransform(scrollY, [0, 100], [1, 0.95]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
+
+  // Determine text color based on theme
+  const getTextColorClass = (isActive = false) => {
+    if (theme === 'light') {
+      return isActive ? 'text-primary' : 'text-gray-800 hover:text-primary';
+    }
+    return isActive ? 'text-white' : 'text-gray-300 hover:text-white';
+  };
+
+  // Get mobile menu button color based on theme
+  const getMobileMenuButtonClass = () => {
+    return theme === 'light' 
+      ? 'text-gray-800 hover:text-primary' 
+      : 'text-gray-300 hover:text-white';
+  };
 
   return (
     <motion.header 
@@ -64,7 +85,7 @@ const Navigation = () => {
 
           {/* Hamburger for mobile */}
           <button
-            className="md:hidden text-gray-300 hover:text-white focus:outline-none ml-auto"
+            className={`md:hidden focus:outline-none ml-auto ${getMobileMenuButtonClass()}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation menu"
           >
@@ -86,7 +107,7 @@ const Navigation = () => {
                 whileHover={{ y: -2 }}
               >
                 <Link href="/" className="relative group">
-                  <span className="relative z-10 text-gray-300 group-hover:text-white transition-colors">Home</span>
+                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>Home</span>
                   <motion.span
                     className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300"
                     layoutId="underline"
@@ -114,7 +135,7 @@ const Navigation = () => {
               >
                 <Link 
                   href="/portfolio" 
-                  className="flex items-center space-x-1 text-gray-300 group-hover:text-white transition-colors"
+                  className={`flex items-center space-x-1 transition-colors ${getTextColorClass()}`}
                 >
                   <span>Portfolio</span>
                   <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
@@ -128,14 +149,14 @@ const Navigation = () => {
                     y: portfolioOpen ? 0 : 10
                   }}
                   transition={{ duration: 0.2 }}
-                  className="absolute left-0 mt-2 w-64 rounded-lg bg-black/90 backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden"
+                  className={`absolute left-0 mt-2 w-64 rounded-lg ${theme === 'light' ? 'bg-white/90' : 'bg-black/90'} backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden`}
                 >
                   <div className="py-2">
                     {portfolioDropdownItems.map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
+                        className={`block px-4 py-3 ${getTextColorClass()} hover:bg-primary/10 transition-colors`}
                       >
                         {item.text}
                       </Link>
@@ -150,7 +171,7 @@ const Navigation = () => {
                 whileHover={{ y: -2 }}
               >
                 <Link href="/blog" className="relative group">
-                  <span className="relative z-10 text-gray-300 group-hover:text-white transition-colors">Blog</span>
+                  <span className={`relative z-10 transition-colors ${getTextColorClass()}`}>Blog</span>
                   <motion.span
                     className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-start to-end group-hover:w-full transition-all duration-300"
                     layoutId="underline"
