@@ -230,8 +230,14 @@ body {
   display: none;
 }
 
-.theme-dark .bg-theme-light {
+.theme-dark .bg-theme-light,
+.theme-colorful .bg-theme-light {
   display: none;
+}
+
+/* Ensure theme-colorful uses dark background like theme-dark */
+.theme-colorful .bg-theme-dark {
+  display: block;
 }
 
 /* Blog post content in light theme */

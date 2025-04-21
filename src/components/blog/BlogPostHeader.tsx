@@ -26,6 +26,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   image,
 }) => {
   const { theme } = useTheme();
+  // Only light theme should be treated differently, colorful theme remains dark
   const isLight = theme === 'light';
 
   return (
@@ -67,7 +68,7 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
         
         <div className={`flex flex-wrap items-center gap-6 ${isLight ? 'text-gray-600' : 'text-theme opacity-70'} mb-8 border-b ${isLight ? 'border-gray-200' : 'border-primary/10'} pb-8`}>
           <div className="flex items-center gap-3">
-            <div className="relative w-[80px] h-[80px] rounded-full overflow-hidden flex-shrink-0 border-2 border-primary/20">
+            <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden flex-shrink-0 shadow-[0_0_15px_rgba(236,72,153,0.3)]">
               <Image 
                 src="/images/me/ali.png" 
                 alt={author}

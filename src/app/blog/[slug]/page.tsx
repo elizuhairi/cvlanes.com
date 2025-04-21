@@ -17,9 +17,9 @@ export function generateStaticParams() {
 export default async function BlogPost({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const post = posts.find((p) => p.slug === slug);
 
   if (!post) return null;
@@ -59,14 +59,12 @@ function BlogPostContent({ post, shareUrl }: { post: typeof posts[0], shareUrl: 
               <h3 className="text-2xl font-bold mb-6 text-primary">About the Author</h3>
               <Card variant="primary">
                 <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-r from-start to-end p-1">
-                    <div className="w-full h-full rounded-full overflow-hidden">
-                      <img
-                        src="/images/me/ali.png"
-                        alt={post.author}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                  <div className="w-24 h-24 rounded-full overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                    <img
+                      src="/images/me/ali.png"
+                      alt={post.author}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
                     <h4 className="text-xl font-semibold mb-2">{post.author}</h4>
@@ -94,11 +92,13 @@ function BlogPostContent({ post, shareUrl }: { post: typeof posts[0], shareUrl: 
 function BlogPostBackground() {
   return (
     <>
-      <div className="absolute inset-0 bg-theme-light dark:hidden z-0">
+      {/* Light theme background - only visible in light theme */}
+      <div className="absolute inset-0 bg-theme-light z-0">
         <div className="absolute inset-0 bg-gray-50/80"></div>
       </div>
 
-      <div className="absolute inset-0 bg-theme-dark hidden dark:block z-0">
+      {/* Dark/Colorful theme background - visible in dark and colorful themes */}
+      <div className="absolute inset-0 bg-theme-dark z-0">
         <BackgroundEffect type="gradient" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/20 pointer-events-none"></div>
       </div>
