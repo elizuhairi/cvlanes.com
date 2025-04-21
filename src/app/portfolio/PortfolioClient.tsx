@@ -67,14 +67,14 @@ export default function PortfolioClient({ items }: Props) {
               >
                 <Link href={item.link} className="block -m-8">
                   <div className="flex flex-col md:flex-row">
-                    <div className="relative w-full md:w-1/2 h-64 md:h-96">
+                    <div className="relative w-full md:w-1/2 h-64 md:h-96 overflow-hidden">
                       {item.photo ? (
                         <>
                           <Image
                             src={item.photo.url}
                             alt={item.title}
                             fill
-                            className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                            className="object-cover transform transition-transform duration-300 group-hover:scale-105"
                             sizes="(max-width: 768px) 100vw, 50vw"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />

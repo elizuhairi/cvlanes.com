@@ -45,7 +45,7 @@ const Card: React.FC<CardProps> = ({
       <div className={getGlowClassName()} />
       
       {/* Main content container with background that adapts to theme */}
-      <div className="theme-card-content p-8">
+      <div className="theme-card-content p-8 overflow-hidden">
         {children}
       </div>
     </motion.div>

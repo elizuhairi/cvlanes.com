@@ -27,7 +27,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
     <Card variant={variant} className="overflow-hidden">
       <article className="group relative">
         <Link href={`/blog/${post.slug}`} className="block">
-          <div className="relative h-52 w-full -mx-8 -mt-8 mb-6 overflow-hidden">
+          <div className="relative h-52 -mx-8 -mt-8 mb-6 overflow-hidden">
             <Image
               src={post.image}
               alt={post.title}

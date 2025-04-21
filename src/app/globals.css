@@ -32,7 +32,7 @@
 /* Light theme */
 .theme-light {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f2937;
   --primary: #3b82f6;
   --primary-hover: #2563eb;
   --gradient-start: #3b82f6;
@@ -41,7 +41,7 @@
   --primary-glow: rgba(59, 130, 246, 0.2);
   
   /* Card Colors - Light Theme */
-  --card-from-bg: rgba(249, 250, 251, 0.9);
+  --card-from-bg: rgba(253, 253, 253, 0.9);
   --card-to-bg: rgba(243, 244, 246, 0.9);
   --card-border: rgba(229, 231, 235, 0.5);
   --card-border-hover: rgba(96, 165, 250, 0.5);
@@ -138,6 +138,7 @@ body {
 /* Card component styling */
 .theme-card {
   @apply relative;
+  transform-style: preserve-3d;
 }
 
 .theme-card-glow {
@@ -162,11 +163,22 @@ body {
 }
 
 .theme-card-content {
-  @apply relative rounded-xl backdrop-blur-sm transition-all duration-300;
+  @apply relative rounded-xl backdrop-blur-sm transition-all duration-300 overflow-hidden;
   background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
   border: 1px solid var(--card-border);
+  z-index: 1;
 }
 
 .theme-card-content:hover {
   border-color: var(--card-border-hover);
+}
+
+/* Ensure images stay contained within cards */
+.theme-card img {
+  @apply transition-transform duration-300;
+  transform-origin: center center;
+}
+
+.theme-card .overflow-hidden {
+  @apply z-10;
 }

@@ -34,7 +34,7 @@ const HomePage = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-20 bg-black/30 relative overflow-hidden"
+        className="py-20 bg-black/5 relative overflow-hidden"
       >
         {/* Background decoration */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
@@ -141,7 +141,7 @@ const HomePage = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-20 bg-black/30 relative overflow-hidden"
+        className="py-20 bg-black/5 relative overflow-hidden"
       >
         <div className="container mx-auto px-4">
           <div className="relative">
@@ -231,7 +231,7 @@ const HomePage = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-20 bg-black/30"
+        className="py-20 bg-black/5"
       >
         <div className="container mx-auto px-4">
           <h3 className="text-3xl font-bold mb-8 text-center">Additional Information</h3>
@@ -261,7 +261,7 @@ const HomePage = () => {
         </div>
       </motion.section>
 
-      <footer className="bg-theme border-t border-primary/10 opacity-70 py-8">
+      <footer className="bg-theme opacity-70 py-8">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
         </div>

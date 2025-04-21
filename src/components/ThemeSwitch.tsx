@@ -17,7 +17,7 @@ export default function ThemeSwitch() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => handleThemeChange('light')}
-        className={`relative w-8 h-8 flex items-center justify-center rounded-full transition-all ${
+        className={`relative w-8 h-8 flex items-center justify-center rounded-full transition-all group ${
           theme === 'light' 
             ? 'bg-primary-glow text-primary' 
             : 'bg-transparent text-gray-400 hover:text-gray-300'
@@ -34,13 +34,17 @@ export default function ThemeSwitch() {
             exit={{ opacity: 0 }}
           />
         )}
+        {/* Tooltip */}
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap">
+          Light Theme
+        </div>
       </motion.button>
       
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => handleThemeChange('dark')}
-        className={`relative w-8 h-8 flex items-center justify-center rounded-full transition-all ${
+        className={`relative w-8 h-8 flex items-center justify-center rounded-full transition-all group ${
           theme === 'dark' 
             ? 'bg-primary-glow text-primary' 
             : 'bg-transparent text-gray-400 hover:text-gray-300'
@@ -57,13 +61,17 @@ export default function ThemeSwitch() {
             exit={{ opacity: 0 }}
           />
         )}
+        {/* Tooltip */}
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap">
+          Dark Theme
+        </div>
       </motion.button>
       
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => handleThemeChange('colorful')}
-        className={`relative w-8 h-8 flex items-center justify-center rounded-full transition-all ${
+        className={`relative w-8 h-8 flex items-center justify-center rounded-full transition-all group ${
           theme === 'colorful' 
             ? 'bg-primary-glow text-primary' 
             : 'bg-transparent text-gray-400 hover:text-gray-300'
@@ -80,6 +88,10 @@ export default function ThemeSwitch() {
             exit={{ opacity: 0 }}
           />
         )}
+        {/* Tooltip */}
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap">
+          Colorful Theme
+        </div>
       </motion.button>
     </div>
   );
