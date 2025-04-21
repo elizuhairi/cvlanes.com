@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
+import Card from '@/components/Card';
 
 interface PortfolioItem {
   title: string;
@@ -59,78 +60,73 @@ export default function PortfolioClient({ items }: Props) {
 
           <div className="grid grid-cols-1 gap-8">
             {items.map((item, index) => (
-              <motion.div
+              <Card
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="group relative"
+                variant={index % 3 === 0 ? 'primary' : index % 3 === 1 ? 'secondary' : 'tertiary'}
+                slideDirection={index % 2 === 0 ? 'left' : 'right'}
               >
-                <Link href={item.link} className="block">
-                  <div className="bg-theme rounded-2xl overflow-hidden border border-primary/10">
-                    <div className="flex flex-col md:flex-row">
-                      <div className="relative w-full md:w-1/2 h-64 md:h-96">
-                        {item.photo ? (
-                          <>
-                            <Image
-                              src={item.photo.url}
-                              alt={item.title}
-                              fill
-                              className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                              sizes="(max-width: 768px) 100vw, 50vw"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                            {item.photo.author && (
-                              <div className="absolute bottom-2 right-2 text-xs text-white/70">
-                                Photo by{' '}
-                                <a
-                                  href={item.photo.author.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="hover:text-white"
-                                >
-                                  {item.photo.author.name}
-                                </a>
-                                {' '}on{' '}
-                                <a
-                                  href="https://unsplash.com"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="hover:text-white"
-                                >
-                                  Unsplash
-                                </a>
-                              </div>
-                            )}
-                          </>
-                        ) : (
-                          <div className="w-full h-full bg-theme flex items-center justify-center">
-                            <span className="opacity-50">Image unavailable</span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                        <span className={`text-sm font-medium bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent mb-4`}>
-                          {item.type}
-                        </span>
-                        <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
-                          {item.title}
-                        </h3>
-                        <p className="opacity-80 mb-6">
-                          {item.desc}
-                        </p>
-                        <span className="inline-flex items-center text-primary group-hover:opacity-80 transition-colors">
-                          Learn more
-                          <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </span>
-                      </div>
+                <Link href={item.link} className="block -m-8">
+                  <div className="flex flex-col md:flex-row">
+                    <div className="relative w-full md:w-1/2 h-64 md:h-96">
+                      {item.photo ? (
+                        <>
+                          <Image
+                            src={item.photo.url}
+                            alt={item.title}
+                            fill
+                            className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                          {item.photo.author && (
+                            <div className="absolute bottom-2 right-2 text-xs text-white/70">
+                              Photo by{' '}
+                              <a
+                                href={item.photo.author.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-white"
+                              >
+                                {item.photo.author.name}
+                              </a>
+                              {' '}on{' '}
+                              <a
+                                href="https://unsplash.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-white"
+                              >
+                                Unsplash
+                              </a>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <div className="w-full h-full bg-theme flex items-center justify-center">
+                          <span className="opacity-50">Image unavailable</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                      <span className={`text-sm font-medium bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent mb-4`}>
+                        {item.type}
+                      </span>
+                      <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="opacity-80 mb-6">
+                        {item.desc}
+                      </p>
+                      <span className="inline-flex items-center text-primary group-hover:opacity-80 transition-colors">
+                        Learn more
+                        <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
                 </Link>
-              </motion.div>
+              </Card>
             ))}
           </div>
         </motion.div>

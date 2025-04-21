@@ -150,15 +150,14 @@ export default function CollaborationClient() {
                     )
                   }
                 ].map((item, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    className="p-6 bg-gray-800/50 rounded-lg hover:bg-gray-800/70 transition-all duration-300 transform hover:scale-105"
-                    whileHover={{ y: -5 }}
+                    className="theme-card-content p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
                   >
                     {item.icon}
                     <h3 className="text-xl font-semibold text-primary mb-2">{item.phase}</h3>
-                    <p className="text-opacity-80">{item.desc}</p>
-                  </motion.div>
+                    <p className="opacity-80">{item.desc}</p>
+                  </div>
                 ))}
               </div>
             </motion.section>

@@ -14,6 +14,13 @@
   --gradient-end: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.2);
 
+  /* Card Colors */
+  --card-from-bg: rgba(249, 250, 251, 0.9);
+  --card-to-bg: rgba(243, 244, 246, 0.9);
+  --card-border: rgba(229, 231, 235, 0.5);
+  --card-border-hover: rgba(96, 165, 250, 0.5);
+  --card-shadow-color: rgba(59, 130, 246, 0.2);
+  
   /* Material Symbols configuration */
   --material-symbols: 'Material Symbols Rounded';
   --material-symbols-weight: 200;
@@ -32,6 +39,13 @@
   --gradient-mid: #a855f7;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.2);
+  
+  /* Card Colors - Light Theme */
+  --card-from-bg: rgba(249, 250, 251, 0.9);
+  --card-to-bg: rgba(243, 244, 246, 0.9);
+  --card-border: rgba(229, 231, 235, 0.5);
+  --card-border-hover: rgba(96, 165, 250, 0.5);
+  --card-shadow-color: rgba(59, 130, 246, 0.2);
 }
 
 /* Dark theme */
@@ -44,6 +58,13 @@
   --gradient-mid: #a855f7;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.2);
+  
+  /* Card Colors - Dark Theme */
+  --card-from-bg: rgba(31, 41, 55, 0.9);
+  --card-to-bg: rgba(17, 24, 39, 0.9);
+  --card-border: rgba(75, 85, 99, 0.5);
+  --card-border-hover: rgba(96, 165, 250, 0.5);
+  --card-shadow-color: rgba(59, 130, 246, 0.2);
 }
 
 /* Colorful theme (default) */
@@ -56,6 +77,13 @@
   --gradient-mid: #a855f7;
   --gradient-end: #3b82f6;
   --primary-glow: rgba(168, 85, 247, 0.2);
+  
+  /* Card Colors - Colorful Theme */
+  --card-from-bg: rgba(31, 41, 55, 0.9);
+  --card-to-bg: rgba(17, 24, 39, 0.9);
+  --card-border: rgba(75, 85, 99, 0.5);
+  --card-border-hover: rgba(168, 85, 247, 0.5);
+  --card-shadow-color: rgba(168, 85, 247, 0.2);
 }
 
 @theme inline {
@@ -105,4 +133,40 @@ body {
     'wght' var(--material-symbols-weight),
     'GRAD' var(--material-symbols-grade),
     'opsz' var(--material-symbols-optical-size);
+}
+
+/* Card component styling */
+.theme-card {
+  @apply relative;
+}
+
+.theme-card-glow {
+  @apply absolute -inset-1 rounded-xl blur-xl transition-all duration-300 opacity-70 group-hover:blur-2xl;
+  background: linear-gradient(to right, var(--card-shadow-color), var(--card-shadow-color));
+}
+
+.theme-card-glow-primary {
+  --card-shadow-color: rgba(168, 85, 247, 0.2);
+}
+
+.theme-card-glow-secondary {
+  --card-shadow-color: rgba(59, 130, 246, 0.2);
+}
+
+.theme-card-glow-tertiary {
+  --card-shadow-color: rgba(124, 58, 237, 0.2);
+}
+
+.theme-card-glow-muted {
+  --card-shadow-color: rgba(156, 163, 175, 0.2);
+}
+
+.theme-card-content {
+  @apply relative rounded-xl backdrop-blur-sm transition-all duration-300;
+  background: linear-gradient(to bottom right, var(--card-from-bg), var(--card-to-bg));
+  border: 1px solid var(--card-border);
+}
+
+.theme-card-content:hover {
+  border-color: var(--card-border-hover);
 }

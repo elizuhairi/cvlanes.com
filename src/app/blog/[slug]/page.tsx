@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import BlogPostHeader from '@/components/blog/BlogPostHeader';
 import BlogPostClient from '@/components/blog/BlogPostClient';
 import BlogContent from '@/components/blog/BlogContent';
+import Card from '@/components/Card';
 import { posts } from '../posts/data';
 import BackgroundEffect from '@/components/hero/effects/BackgroundEffect';
 
@@ -46,19 +47,21 @@ export default async function BlogPost({
 
             <BlogContent content={post.content} />
 
-            <div className="mt-16 pt-8 border-t border-primary/10">
-              <h3 className="text-2xl font-bold mb-4 text-primary">About the Author</h3>
-              <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-r from-start to-end p-1">
-                  <div className="w-full h-full rounded-full bg-black/50 overflow-hidden" />
+            <div className="mt-16">
+              <h3 className="text-2xl font-bold mb-6 text-primary">About the Author</h3>
+              <Card variant="primary">
+                <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-r from-start to-end p-1">
+                    <div className="w-full h-full rounded-full bg-black/50 overflow-hidden" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-2">{post.author}</h4>
+                    <p className="opacity-80">
+                      Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-2">{post.author}</h4>
-                  <p className="opacity-80">
-                    Product Owner and Design Leader with expertise in UX design, agile methodologies, and creative innovation.
-                  </p>
-                </div>
-              </div>
+              </Card>
             </div>
           </BlogPostClient>
         </div>
