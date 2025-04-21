@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ThemeSwitch from './ThemeSwitch';
@@ -27,6 +27,33 @@ const Navigation = () => {
   const scale = useTransform(scrollY, [0, 100], [1, 0.95]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
+  const portfolioTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Handle portfolio dropdown timeout
+  const handleMenuOpen = () => {
+    // Clear any existing timeout
+    if (portfolioTimeoutRef.current) {
+      clearTimeout(portfolioTimeoutRef.current);
+      portfolioTimeoutRef.current = null;
+    }
+    setPortfolioOpen(true);
+  };
+
+  const handleMenuClose = () => {
+    // Set a timeout to close the menu after 3 seconds
+    portfolioTimeoutRef.current = setTimeout(() => {
+      setPortfolioOpen(false);
+    }, 3000);
+  };
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (portfolioTimeoutRef.current) {
+        clearTimeout(portfolioTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Determine text color based on theme
   const getTextColorClass = (isActive = false) => {
@@ -131,28 +158,30 @@ const Navigation = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <div 
-                  className="inline-block"
-                  onMouseEnter={() => setPortfolioOpen(true)}
-                  onMouseLeave={() => setPortfolioOpen(false)}
+                <Link 
+                  href="/portfolio" 
+                  className={`flex items-center space-x-1 transition-colors ${getTextColorClass()}`}
+                  onMouseEnter={handleMenuOpen}
+                  onMouseLeave={handleMenuClose}
                 >
-                  <Link 
-                    href="/portfolio" 
-                    className={`flex items-center space-x-1 transition-colors ${getTextColorClass()}`}
-                  >
-                    <span>Portfolio</span>
-                    <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
-                      expand_more
-                    </span>
-                  </Link>
+                  <span>Portfolio</span>
+                  <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
+                    expand_more
+                  </span>
+                </Link>
+                
+                {portfolioOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
-                    animate={{ 
-                      opacity: portfolioOpen ? 1 : 0,
-                      y: portfolioOpen ? 0 : 10
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ 
+                      duration: portfolioOpen ? 0.2 : 0.5, // Longer fade out
+                      ease: "easeInOut" 
                     }}
-                    transition={{ duration: 0.2 }}
                     className={`absolute left-0 mt-2 w-64 rounded-lg ${theme === 'light' ? 'bg-white/90' : 'bg-black/90'} backdrop-blur-lg shadow-lg ring-1 ring-black/5 overflow-hidden`}
+                    onMouseEnter={handleMenuOpen}
+                    onMouseLeave={handleMenuClose}
                   >
                     <div className="py-2">
                       {portfolioDropdownItems.map((item) => (
@@ -166,7 +195,7 @@ const Navigation = () => {
                       ))}
                     </div>
                   </motion.div>
-                </div>
+                )}
               </motion.li>
               <motion.li 
                 initial={{ opacity: 0, y: -10 }}
@@ -247,7 +276,16 @@ const Navigation = () => {
                       className="ml-2 text-gray-300 hover:text-white"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setPortfolioOpen(!portfolioOpen);
+                        // Toggle menu and clear any existing timeout
+                        if (portfolioOpen) {
+                          setPortfolioOpen(false);
+                        } else {
+                          if (portfolioTimeoutRef.current) {
+                            clearTimeout(portfolioTimeoutRef.current);
+                            portfolioTimeoutRef.current = null;
+                          }
+                          setPortfolioOpen(true);
+                        }
                       }}
                     >
                       <span className={`material-symbols transform transition-transform ${portfolioOpen ? 'rotate-180' : ''}`}>
@@ -256,7 +294,13 @@ const Navigation = () => {
                     </button>
                   </div>
                   {portfolioOpen && (
-                    <ul className="mt-4 ml-4 space-y-4">
+                    <motion.ul 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.1 }}
+                      className="mt-4 ml-4 space-y-4 overflow-hidden"
+                    >
                       {portfolioDropdownItems.map((item) => (
                         <li key={item.href}>
                           <Link
@@ -268,7 +312,7 @@ const Navigation = () => {
                           </Link>
                         </li>
                       ))}
-                    </ul>
+                    </motion.ul>
                   )}
                 </li>
                 <li>
