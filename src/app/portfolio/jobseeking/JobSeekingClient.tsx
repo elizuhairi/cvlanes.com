@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function JobSeekingClient() {
   const fadeInUp = {
@@ -10,6 +11,9 @@ export default function JobSeekingClient() {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 }
   };
+
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   return (
     <article className="pt-24 pb-16 relative z-10">
@@ -40,7 +44,7 @@ export default function JobSeekingClient() {
           {/* Header Section */}
           <motion.h1 
             variants={fadeInUp}
-            className="text-5xl font-bold mb-6 bg-gradient-to-r from-start via-mid to-end bg-clip-text text-transparent"
+            className={`text-5xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}
           >
             Job Seeking Application
           </motion.h1>

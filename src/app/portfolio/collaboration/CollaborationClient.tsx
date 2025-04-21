@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Image from 'next/image';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function CollaborationClient() {
   const fadeInUp = {
@@ -11,6 +12,9 @@ export default function CollaborationClient() {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 }
   };
+
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   return (
     <main className="min-h-screen bg-theme text-theme">
@@ -45,7 +49,7 @@ export default function CollaborationClient() {
             {/* Header Section */}
             <motion.h1 
               variants={fadeInUp}
-              className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+              className={`text-5xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}
             >
               Collaboration Workflow Platform
             </motion.h1>
