@@ -54,19 +54,18 @@ const Card: React.FC<CardProps> = ({
         case 'muted': colorShadow = 'shadow-gray-400/10'; hoverColorShadow = 'hover:shadow-gray-400/15'; break;
         default: colorShadow = 'shadow-primary/5'; hoverColorShadow = 'hover:shadow-primary/10'; break;
       }
-      // Light theme: Apply base shadow and hover shadow
       return `${baseShadow} ${colorShadow} ${hoverShadow} ${hoverColorShadow}`;
     } else if (isColorful) {
-      // Colorful theme: No default shadow, only hover shadow with vibrant colors
+      // Colorful theme: Apply shadows with same opacity as dark theme, but vibrant colors
       switch (variant) {
-        case 'primary': hoverColorShadow = 'hover:shadow-fuchsia-500/25'; break;
-        case 'secondary': hoverColorShadow = 'hover:shadow-cyan-500/25'; break;
-        case 'tertiary': hoverColorShadow = 'hover:shadow-violet-500/25'; break;
-        case 'muted': hoverColorShadow = 'hover:shadow-sky-400/25'; break;
-        default: hoverColorShadow = 'hover:shadow-fuchsia-500/25'; break;
+        case 'primary': colorShadow = 'shadow-fuchsia-500/10'; hoverColorShadow = 'hover:shadow-fuchsia-500/20'; break;
+        case 'secondary': colorShadow = 'shadow-cyan-500/10'; hoverColorShadow = 'hover:shadow-cyan-500/20'; break;
+        case 'tertiary': colorShadow = 'shadow-violet-500/10'; hoverColorShadow = 'hover:shadow-violet-500/20'; break;
+        case 'muted': colorShadow = 'shadow-sky-400/10'; hoverColorShadow = 'hover:shadow-sky-400/20'; break;
+        default: colorShadow = 'shadow-fuchsia-500/10'; hoverColorShadow = 'hover:shadow-fuchsia-500/20'; break;
       }
-      // Colorful theme: Only apply hover shadow size and color
-      return `${hoverShadow} ${hoverColorShadow}`;
+      // Colorful theme: Apply base shadow and hover shadow
+      return `${baseShadow} ${colorShadow} ${hoverShadow} ${hoverColorShadow}`;
     } else {
       // Dark theme shadows (Standard)
       switch (variant) {
@@ -76,7 +75,6 @@ const Card: React.FC<CardProps> = ({
         case 'muted': colorShadow = 'shadow-gray-500/10'; hoverColorShadow = 'hover:shadow-gray-500/20'; break;
         default: colorShadow = 'shadow-primary/10'; hoverColorShadow = 'hover:shadow-primary/20'; break;
       }
-      // Dark theme: Apply base shadow and hover shadow
       return `${baseShadow} ${colorShadow} ${hoverShadow} ${hoverColorShadow}`;
     }
   };
@@ -87,7 +85,7 @@ const Card: React.FC<CardProps> = ({
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className={`theme-card group ${getShadowClassName()} transform-gpu transition-shadow duration-200 ease-in-out overflow-hidden ${className}`}
+      className={`theme-card group ${getShadowClassName()} transform-gpu transition-shadow duration-300 ease-in-out overflow-hidden ${className}`}
       whileHover={hoverEffect ? { scale: 1.01 } : {}}
     >
       {/* Glow effect layer - styles controlled by globals.css */}
