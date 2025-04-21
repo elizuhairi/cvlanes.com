@@ -19,7 +19,7 @@ const BlogPage = () => {
     : posts;
 
   return (
-    <main className="min-h-screen bg-theme">
+    <main className="min-h-screen bg-theme text-theme">
       <Navigation />
       
       {/* Hero Section */}
@@ -36,7 +36,7 @@ const BlogPage = () => {
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-start via-mid to-end bg-clip-text text-transparent">
             Blog & Insights
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
+          <p className="text-xl opacity-80 max-w-2xl mx-auto mb-10">
             Thoughts, learnings, and perspectives on design leadership, 
             product management, and the intersection of creativity and technology.
           </p>
@@ -50,7 +50,7 @@ const BlogPage = () => {
               className={`px-4 py-2 rounded-full text-sm transition-colors ${
                 selectedTag === null 
                   ? 'bg-primary text-white' 
-                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                  : 'bg-white/10 text-theme hover:bg-white/20'
               }`}
             >
               All
@@ -65,7 +65,7 @@ const BlogPage = () => {
                 className={`px-4 py-2 rounded-full text-sm transition-colors ${
                   selectedTag === tag 
                     ? 'bg-primary text-white' 
-                    : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                    : 'bg-white/10 text-theme hover:bg-white/20'
                 }`}
               >
                 {tag}
@@ -90,7 +90,7 @@ const BlogPage = () => {
               animate={{ opacity: 1 }}
               className="text-center py-16"
             >
-              <p className="text-xl text-gray-400">No posts found for this tag.</p>
+              <p className="text-xl opacity-70">No posts found for this tag.</p>
               <button 
                 onClick={() => setSelectedTag(null)}
                 className="mt-4 px-6 py-2 bg-primary/20 text-primary rounded-full hover:bg-primary/30 transition-colors"
@@ -102,7 +102,7 @@ const BlogPage = () => {
         </div>
       </section>
 
-      <footer className="bg-black/40 text-gray-400 py-8">
+      <footer className="bg-theme border-t border-primary/10 text-theme opacity-70 py-8">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
         </div>

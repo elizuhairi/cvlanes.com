@@ -25,7 +25,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className="group relative bg-black/20 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 border border-white/5"
+      className="group relative bg-theme/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 border border-primary/10"
     >
       <Link href={`/blog/${post.slug}`} className="block">
         <div className="relative h-52 w-full overflow-hidden">
@@ -54,7 +54,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
         
         <div className="p-6">
           <h3 className="text-xl font-semibold mb-2 text-primary group-hover:text-primary-hover transition-colors">{post.title}</h3>
-          <p className="text-gray-400 text-sm mb-3 flex items-center gap-4">
+          <p className="text-theme opacity-70 text-sm mb-3 flex items-center gap-4">
             <span>{post.publishedDate}</span>
             <span>•</span>
             <span className="flex items-center">
@@ -84,7 +84,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
           url={`${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/blog/${post.slug}`}
           title={post.title}
         >
-          <div className="bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-colors">
+          <div className="bg-theme/50 backdrop-blur-sm p-2 rounded-full hover:bg-theme/70 transition-colors">
             <TwitterIcon size={20} round />
           </div>
         </TwitterShareButton>
@@ -92,7 +92,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
           url={`${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/blog/${post.slug}`}
           title={post.title}
         >
-          <div className="bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-colors">
+          <div className="bg-theme/50 backdrop-blur-sm p-2 rounded-full hover:bg-theme/70 transition-colors">
             <LinkedinIcon size={20} round />
           </div>
         </LinkedinShareButton>

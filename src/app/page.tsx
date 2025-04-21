@@ -22,7 +22,7 @@ const heroConfig: HeroConfig = {
 
 const HomePage = () => {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white">
+    <main className="min-h-screen bg-theme text-theme">
       <Navigation />
       <Hero config={heroConfig} />
 
@@ -49,7 +49,7 @@ const HomePage = () => {
               work_history
             </motion.span>
             <h3 className="text-3xl font-bold mb-4">Work Experience</h3>
-            <p className="text-gray-400 max-w-2xl mx-auto">A journey through my professional career, showcasing my growth and expertise in design and technology.</p>
+            <p className="opacity-70 max-w-2xl mx-auto">A journey through my professional career, showcasing my growth and expertise in design and technology.</p>
           </div>
 
           <div className="max-w-5xl mx-auto space-y-12">

@@ -59,9 +59,9 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
         
         <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-start via-mid to-end bg-clip-text text-transparent">{title}</h1>
         
-        <p className="text-xl text-gray-300 mb-6">{description}</p>
+        <p className="text-xl text-theme opacity-80 mb-6">{description}</p>
         
-        <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400 mb-8 border-b border-white/10 pb-8">
+        <div className="flex flex-wrap items-center gap-6 text-sm text-theme opacity-70 mb-8 border-b border-primary/10 pb-8">
           <span className="flex items-center">
             <svg className="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>

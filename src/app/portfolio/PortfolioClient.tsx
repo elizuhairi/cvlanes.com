@@ -28,7 +28,7 @@ interface Props {
 
 export default function PortfolioClient({ items }: Props) {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white">
+    <main className="min-h-screen bg-theme text-theme">
       <Navigation />
 
       <section className="min-h-screen pt-24">
@@ -51,7 +51,7 @@ export default function PortfolioClient({ items }: Props) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-xl text-gray-300"
+              className="text-xl opacity-80"
             >
               Exploring my journey through design leadership, team collaboration, and professional growth.
             </motion.p>
@@ -68,7 +68,7 @@ export default function PortfolioClient({ items }: Props) {
                 className="group relative"
               >
                 <Link href={item.link} className="block">
-                  <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden">
+                  <div className="bg-theme rounded-2xl overflow-hidden border border-primary/10">
                     <div className="flex flex-col md:flex-row">
                       <div className="relative w-full md:w-1/2 h-64 md:h-96">
                         {item.photo ? (
@@ -80,7 +80,7 @@ export default function PortfolioClient({ items }: Props) {
                               className="object-cover transform group-hover:scale-105 transition-transform duration-300"
                               sizes="(max-width: 768px) 100vw, 50vw"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                             {item.photo.author && (
                               <div className="absolute bottom-2 right-2 text-xs text-white/70">
                                 Photo by{' '}
@@ -105,8 +105,8 @@ export default function PortfolioClient({ items }: Props) {
                             )}
                           </>
                         ) : (
-                          <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-                            <span className="text-gray-600">Image unavailable</span>
+                          <div className="w-full h-full bg-theme flex items-center justify-center">
+                            <span className="opacity-50">Image unavailable</span>
                           </div>
                         )}
                       </div>
@@ -114,13 +114,13 @@ export default function PortfolioClient({ items }: Props) {
                         <span className={`text-sm font-medium bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent mb-4`}>
                           {item.type}
                         </span>
-                        <h3 className="text-3xl font-bold mb-4 group-hover:text-blue-400 transition-colors">
+                        <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
                           {item.title}
                         </h3>
-                        <p className="text-gray-300 mb-6">
+                        <p className="opacity-80 mb-6">
                           {item.desc}
                         </p>
-                        <span className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
+                        <span className="inline-flex items-center text-primary group-hover:opacity-80 transition-colors">
                           Learn more
                           <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -136,7 +136,7 @@ export default function PortfolioClient({ items }: Props) {
         </motion.div>
       </section>
 
-      <footer className="bg-black/40 text-gray-400 py-8 mt-20">
+      <footer className="bg-theme border-t border-primary/10 text-theme opacity-70 py-8 mt-20">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
         </div>

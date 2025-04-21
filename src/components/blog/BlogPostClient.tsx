@@ -48,19 +48,19 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
           
           <div className="flex flex-col gap-2 items-center">
             <TwitterShareButton url={shareUrl} title={title}>
-              <div className="p-2 bg-black/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
+              <div className="p-2 bg-theme/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
                 <TwitterIcon size={24} round />
               </div>
             </TwitterShareButton>
             
             <LinkedinShareButton url={shareUrl} title={title}>
-              <div className="p-2 bg-black/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
+              <div className="p-2 bg-theme/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
                 <LinkedinIcon size={24} round />
               </div>
             </LinkedinShareButton>
             
             <FacebookShareButton url={shareUrl} quote={title}>
-              <div className="p-2 bg-black/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
+              <div className="p-2 bg-theme/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
                 <FacebookIcon size={24} round />
               </div>
             </FacebookShareButton>
@@ -73,19 +73,19 @@ export default function BlogPostClient({ children, shareUrl, title }: BlogPostCl
       {/* Mobile share buttons - at the top */}
       <div className="flex gap-3 mb-8 lg:hidden">
         <TwitterShareButton url={shareUrl} title={title}>
-          <div className="p-2 bg-black/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
+          <div className="p-2 bg-theme/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
             <TwitterIcon size={28} round />
           </div>
         </TwitterShareButton>
         
         <LinkedinShareButton url={shareUrl} title={title}>
-          <div className="p-2 bg-black/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
+          <div className="p-2 bg-theme/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
             <LinkedinIcon size={28} round />
           </div>
         </LinkedinShareButton>
         
         <FacebookShareButton url={shareUrl} quote={title}>
-          <div className="p-2 bg-black/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
+          <div className="p-2 bg-theme/30 backdrop-blur-md rounded-full hover:bg-primary/20 transition-colors">
             <FacebookIcon size={28} round />
           </div>
         </FacebookShareButton>
