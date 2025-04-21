@@ -29,7 +29,7 @@ export default function PromptPage() {
   ○ Make OG metadata globally available for both blog posts and portfolio pages.
 • Design Reference
   ○ For styling inspiration, use the design shown in this Wix post as a reference:
-#fetch https://www.wix.com/features/facebook-ads/post/design-a-stunning-blog?utm_source=bing&utm_medium=cpc&utm_campaign=506190456^1264440027656292^search%20-%20dsa&experiment_id=https%3A%2F%2Fwww.wix.com%2Ffeatures^b^^&msclkid=4ab37492d7e31d6cc62a136d08531001
+#fetch https://
 
 Here is the post:
 #fetch: https://cvlanes.com/blogs/circle-of-rhythm`}
