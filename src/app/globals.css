@@ -69,21 +69,21 @@
 
 /* Colorful theme (default) */
 .theme-colorful {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --primary: #a855f7;
-  --primary-hover: #9333ea;
-  --gradient-start: #ec4899;
-  --gradient-mid: #a855f7;
+  --background: #050023;
+  --foreground: #f0f8ff;
+  --primary: #ff00cc;
+  --primary-hover: #d100ff;
+  --gradient-start: #00ffff;
+  --gradient-mid: #ff00cc;
   --gradient-end: #3b82f6;
-  --primary-glow: rgba(168, 85, 247, 0.2);
+  --primary-glow: rgba(255, 0, 204, 0.3);
   
   /* Card Colors - Colorful Theme */
-  --card-from-bg: rgba(31, 41, 55, 0.9);
-  --card-to-bg: rgba(17, 24, 39, 0.9);
-  --card-border: rgba(75, 85, 99, 0.5);
-  --card-border-hover: rgba(168, 85, 247, 0.5);
-  --card-shadow-color: rgba(168, 85, 247, 0.2);
+  --card-from-bg: rgba(20, 10, 50, 0.8);
+  --card-to-bg: rgba(10, 5, 30, 0.8);
+  --card-border: rgba(128, 0, 255, 0.3);
+  --card-border-hover: rgba(0, 255, 255, 0.6);
+  --card-shadow-color: rgba(255, 0, 204, 0.3);
 }
 
 @theme inline {
@@ -257,4 +257,60 @@ body {
 
 .theme-light .prose img {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Colorful theme specific card styling */
+.theme-colorful .theme-card-content {
+  background: linear-gradient(135deg, var(--card-from-bg), var(--card-to-bg));
+  border: 1px solid var(--card-border);
+  box-shadow: 0 0 20px rgba(128, 0, 255, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.theme-colorful .theme-card-content:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  border-color: var(--card-border-hover);
+  transform: translateY(-3px);
+}
+
+.theme-colorful .theme-card-glow {
+  opacity: 0.7;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 204, 0.3), rgba(59, 130, 246, 0.3));
+  filter: blur(15px);
+}
+
+.theme-colorful .theme-card-glow-primary {
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.4), rgba(255, 0, 204, 0.4));
+}
+
+.theme-colorful .theme-card-glow-secondary {
+  background: linear-gradient(45deg, rgba(255, 0, 204, 0.4), rgba(59, 130, 246, 0.4));
+}
+
+.theme-colorful .theme-card-glow-tertiary {
+  background: linear-gradient(45deg, rgba(59, 130, 246, 0.4), rgba(0, 255, 255, 0.4));
+}
+
+/* Enhance headings in colorful theme */
+.theme-colorful h1, 
+.theme-colorful h2, 
+.theme-colorful h3 {
+  text-shadow: 0 0 10px rgba(255, 0, 204, 0.3);
+}
+
+.theme-colorful .bg-gradient-to-r {
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

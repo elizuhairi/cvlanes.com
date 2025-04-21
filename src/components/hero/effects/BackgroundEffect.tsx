@@ -207,6 +207,109 @@ const ParticlesEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
 
 const GradientEffect = ({ theme = 'dark' }: { theme?: Theme }) => {
   const isLight = theme === 'light';
+  const isColorful = theme === 'colorful';
+  
+  if (isColorful) {
+    return (
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Cosmic background base */}
+        <div className="absolute inset-0 bg-[#050023]" />
+        
+        {/* Animated cosmic nebula effect */}
+        <motion.div
+          className="absolute inset-0 opacity-40"
+          style={{
+            background: 'radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 80% 30%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)'
+          }}
+          animate={{
+            background: [
+              'radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 80% 30%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)',
+              'radial-gradient(circle at 60% 30%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 30% 40%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 70% 70%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)',
+              'radial-gradient(circle at 40% 70%, rgba(0, 255, 255, 0.4) 0%, transparent 25%), radial-gradient(circle at 60% 50%, rgba(255, 0, 204, 0.4) 0%, transparent 30%), radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.4) 0%, transparent 40%)'
+            ]
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        {/* Cosmic stars */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 50 }).map((_, i) => {
+            const size = Math.random() * 2 + 1;
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const duration = Math.random() * 3 + 2;
+            
+            return (
+              <motion.div
+                key={i}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: size,
+                  height: size,
+                  left: `${posX}%`,
+                  top: `${posY}%`,
+                }}
+                animate={{
+                  opacity: [0.2, 0.8, 0.2],
+                  scale: [1, 1.3, 1],
+                }}
+                transition={{
+                  duration: duration,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: Math.random() * 2,
+                }}
+              />
+            );
+          })}
+        </div>
+        
+        {/* Floating cosmic objects */}
+        <motion.div 
+          className="absolute w-40 h-40 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, transparent 70%)',
+            left: '10%',
+            top: '20%'
+          }}
+          animate={{
+            x: [0, 20, 0],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        <motion.div 
+          className="absolute w-60 h-60 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 0, 204, 0.1) 0%, transparent 70%)',
+            right: '15%',
+            bottom: '20%'
+          }}
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 20, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        />
+        
+        {/* Subtle overlay to enhance text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050023] via-transparent to-transparent" />
+      </div>
+    );
+  }
   
   return (
     <div className={`absolute inset-0 ${
