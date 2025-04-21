@@ -21,6 +21,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const isColorful = theme === 'colorful';
 
   const getGlowClassName = () => {
     switch (variant) {
@@ -60,7 +61,7 @@ const Card: React.FC<CardProps> = ({
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className={`theme-card group ${getShadowClassName()} ${className}`}
+      className={`theme-card group ${getShadowClassName()} transform-gpu transition-all ${className}`}
     >
       {/* Glow effect that changes with theme */}
       <div className={getGlowClassName()} />

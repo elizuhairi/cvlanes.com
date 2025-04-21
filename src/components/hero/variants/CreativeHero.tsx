@@ -97,14 +97,43 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
           >
             <Link
               href={cta.href}
-              className={`inline-block px-8 py-4 ${
-                isLight 
-                  ? 'bg-blue-500 hover:bg-blue-600 text-white' 
-                  : 'bg-blue-500 hover:bg-blue-600 text-white'
-              } rounded-full font-medium transition-colors duration-300`}
+              className={`inline-block px-8 py-4 rounded-full font-medium transition-all duration-300 relative overflow-hidden ${
+                theme === 'colorful' 
+                  ? 'text-white border border-transparent shadow-lg' 
+                  : isLight 
+                    ? 'bg-blue-500 hover:bg-blue-600 text-white' 
+                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }`}
+              style={{
+                ...(theme === 'colorful' ? {
+                  backgroundImage: 'linear-gradient(135deg, #00ffff, #ff00cc, #3b82f6)',
+                  backgroundSize: '200% 200%',
+                  animation: 'gradientShift 3s ease infinite',
+                } : {})
+              }}
             >
-              {cta.text}
+              <motion.span
+                className="relative z-10"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                {cta.text}
+              </motion.span>
+              {theme === 'colorful' && (
+                <motion.div 
+                  className="absolute inset-0 bg-black/10"
+                  whileHover={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
             </Link>
+            <style jsx global>{`
+              @keyframes gradientShift {
+                0% { background-position: 0% 50% }
+                50% { background-position: 100% 50% }
+                100% { background-position: 0% 50% }
+              }
+            `}</style>
           </motion.div>
         )}
       </div>

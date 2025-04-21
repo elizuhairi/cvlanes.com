@@ -314,3 +314,27 @@ body {
     background-position: 0% 50%;
   }
 }
+
+/* Enhance color theme text visibility */
+.theme-colorful .text-transparent.bg-clip-text {
+  filter: drop-shadow(0 0 2px rgba(255, 0, 204, 0.3));
+}
+
+.theme-colorful .nav-item {
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Improve blog card visibility in colorful theme */
+.theme-colorful .theme-card {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.theme-colorful .theme-card-content:hover {
+  transform: translateY(-5px);
+}
+
+/* Ensure navigation name visibility */
+.theme-colorful .text-transparent {
+  -webkit-text-stroke: 0.2px rgba(255, 255, 255, 0.1);
+}
