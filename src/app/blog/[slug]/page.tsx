@@ -119,9 +119,9 @@ function BlogPostBackground() {
       </div>
 
       {/* Dark/Colorful theme background - visible in dark and colorful themes */}
-      <div className="absolute inset-0 bg-theme-dark z-0">
+      <div className="absolute inset-0 z-0">
         <BackgroundEffect type="gradient" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/20 pointer-events-none"></div>
+        <div className="absolute inset-0 pointer-events-none"></div>
       </div>
     </>
   );
