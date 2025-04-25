@@ -34,9 +34,17 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   // Only light theme should be treated differently, colorful theme remains dark
   const isLight = theme === 'light';
   
-  // Check if this post has audio narration
-  const hasAudio = slug === 'primitive-human';
-  const audioSrc = hasAudio ? '/audio/blog/blog03.mp3' : '';
+  // Map of blog posts with audio content
+  const audioMap: Record<string, string> = {
+    // Make sure the path matches exactly where the file is located
+    'primitive-human': '/audio/blog/blog03.mp3',
+    // Add more audio files here as they become available
+    // 'other-post-slug': '/audio/blog/other-file.mp3',
+  };
+  
+  // Check if this post has audio narration and if the audio file actually exists
+  const hasAudio = slug in audioMap;
+  const audioSrc = hasAudio ? audioMap[slug] : '';
 
   return (
     <div className="mb-12">
