@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
+import { useParams } from 'next/navigation';
+import AudioPlayer from '../ui/AudioPlayer';
 
 interface BlogPostHeaderProps {
   title: string;
@@ -26,8 +28,15 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
   image,
 }) => {
   const { theme } = useTheme();
+  const params = useParams();
+  const slug = params.slug as string;
+  
   // Only light theme should be treated differently, colorful theme remains dark
   const isLight = theme === 'light';
+  
+  // Check if this post has audio narration
+  const hasAudio = slug === 'primitive-human';
+  const audioSrc = hasAudio ? '/audio/blog/blog03.mp3' : '';
 
   return (
     <div className="mb-12">
@@ -92,6 +101,20 @@ const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
           </span>
         </div>
       </motion.div>
+      
+      {/* Audio Player (if available) */}
+      {hasAudio && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+        >
+          <AudioPlayer
+            src={audioSrc}
+            title="Listen to this article"
+          />
+        </motion.div>
+      )}
       
       {/* Featured Image */}
       <motion.div
