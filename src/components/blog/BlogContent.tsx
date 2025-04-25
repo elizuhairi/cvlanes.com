@@ -13,13 +13,10 @@ interface BlogContentProps {
 }
 
 // Helper function to convert markdown-style content to JSX
-function formatContent(content: string, slug: string) {
-  const { theme } = useTheme();
-  const isLight = theme === 'light';
-  
+function formatContent(content: string, slug: string, theme: string) {
   // Special processing for the AI blog post
   if (slug === 'primitive-human') {
-    return formatPrimitiveHumanContent(content);
+    return formatPrimitiveHumanContent(content, theme);
   }
   
   // For other blog posts, use the regular content formatter
@@ -151,8 +148,7 @@ function formatRegularContent(content: string) {
 }
 
 // Separate function to format the primitive-human blog content
-function formatPrimitiveHumanContent(content: string) {
-  const { theme } = useTheme();
+function formatPrimitiveHumanContent(content: string, theme: string) {
   const isLight = theme === 'light';
   
   // Split by chapters or major sections
@@ -326,46 +322,20 @@ function processChapterContent(content: string) {
   });
 }
 
+// Main component
 const BlogContent: React.FC<BlogContentProps> = ({ content, slug }) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [mounted, setMounted] = useState(false);
-  
+  const { theme } = useTheme();
+  const [fullContent, setFullContent] = useState<React.ReactNode>([]);
+
   useEffect(() => {
-    setMounted(true);
-    
-    const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollHeight) {
-        setScrollProgress(window.scrollY / scrollHeight);
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    // Call once to initialize
-    handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
+    setFullContent(formatContent(content, slug, theme));
+  }, [content, slug, theme]);
+
   return (
-    <article className="prose prose-invert max-w-none">
-      {formatContent(content, slug)}
-      
-      {/* Reading progress indicator - only rendered on client side */}
-      {mounted && (
-        <div className="fixed top-0 left-0 w-full h-1 z-50">
-          <motion.div 
-            className="h-full bg-gradient-to-r from-start to-end"
-            style={{ 
-              scaleX: scrollProgress, 
-              transformOrigin: '0%',
-            }}
-            transition={{ duration: 0.1 }}
-          />
-        </div>
-      )}
-    </article>
+    <div className="max-w-4xl mx-auto px-4 pt-8 pb-16">
+      {fullContent}
+    </div>
   );
-};
+}
 
 export default BlogContent; 
