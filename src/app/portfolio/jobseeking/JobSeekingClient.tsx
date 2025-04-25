@@ -125,7 +125,7 @@ export default function JobSeekingClient() {
                   key={index}
                   className="theme-card-content p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
                 >
-                  <div className="p-3 text-purple-400 bg-purple-400/10 rounded-lg mb-4 inline-block">
+                  <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
                     {item.icon}
                   </div>
                   <h3 className="text-xl font-semibold text-primary mb-2">{item.phase}</h3>
@@ -211,21 +211,21 @@ export default function JobSeekingClient() {
                   <h3 className="text-xl font-semibold text-primary mb-4">Personas</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="bg-theme/20 p-4 rounded-lg">
-                      <div className="p-3 text-purple-400 bg-purple-400/10 rounded-lg mb-3 inline-block">
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-3">
                         <span className="material-symbols text-3xl text-purple-400">person</span>
                       </div>
                       <div className="font-bold text-primary mb-2">Allen (20, Student)</div>
                       <p className="opacity-80 text-sm">Uses app infrequently for quick cash. Flexible with night/weekend shifts. Reliable when he works.</p>
                     </div>
                     <div className="bg-theme/20 p-4 rounded-lg">
-                      <div className="p-3 text-purple-400 bg-purple-400/10 rounded-lg mb-3 inline-block">
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-3">
                         <span className="material-symbols text-3xl text-purple-400">school</span>
                       </div>
                       <div className="font-bold text-primary mb-2">James (23, Uni Student)</div>
                       <p className="opacity-80 text-sm">Works 2–3 shifts/week in hospitality. Prefers consistent roles at favorite venues.</p>
                     </div>
                     <div className="bg-theme/20 p-4 rounded-lg">
-                      <div className="p-3 text-purple-400 bg-purple-400/10 rounded-lg mb-3 inline-block">
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-3">
                         <span className="material-symbols text-3xl text-purple-400">work</span>
                       </div>
                       <div className="font-bold text-primary mb-2">Eeva (40, Regular User)</div>
@@ -279,14 +279,18 @@ export default function JobSeekingClient() {
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-2">Epic Goal</h3>
                     <div className="flex items-center">
-                      <span className="material-symbols text-3xl text-purple-400 p-3 bg-purple-400/10 rounded-lg mr-3">flight_takeoff</span>
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-3">
+                        <span className="material-symbols text-3xl text-purple-400">flight_takeoff</span>
+                      </div>
                       <p className="opacity-80">Enable fast income opportunities via local gigs</p>
                     </div>
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-2">User Testing</h3>
                     <div className="flex items-center">
-                      <span className="material-symbols text-3xl text-purple-400 p-3 bg-purple-400/10 rounded-lg mr-3">checklist</span>
+                      <div className="h-16 w-16 flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-3">
+                        <span className="material-symbols text-3xl text-purple-400">checklist</span>
+                      </div>
                       <p className="opacity-80">In progress</p>
                     </div>
                   </div>

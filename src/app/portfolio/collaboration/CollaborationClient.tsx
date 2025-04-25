@@ -121,28 +121,28 @@ export default function CollaborationClient() {
                     phase: "Discover",
                     desc: "Research user needs and pain points",
                     icon: (
-                      <span className="material-symbols text-3xl">search</span>
+                      <span className="material-symbols text-4xl">search</span>
                     )
                   },
                   { 
                     phase: "Define",
                     desc: "Analyze insights to scope the challenge",
                     icon: (
-                      <span className="material-symbols text-3xl">notes</span>
+                      <span className="material-symbols text-4xl">notes</span>
                     )
                   },
                   { 
                     phase: "Develop",
                     desc: "Create solution concepts",
                     icon: (
-                      <span className="material-symbols text-3xl">edit</span>
+                      <span className="material-symbols text-4xl">edit</span>
                     )
                   },
                   { 
                     phase: "Deliver",
                     desc: "Test with users and iterate",
                     icon: (
-                      <span className="material-symbols text-3xl">rocket_launch</span>
+                      <span className="material-symbols text-4xl">rocket_launch</span>
                     )
                   }
                 ].map((item, index) => (
@@ -150,7 +150,9 @@ export default function CollaborationClient() {
                     key={index}
                     className="theme-card-flex p-6 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105"
                   >
-                    {item.icon}
+                    <div className="h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-4">
+                      {item.icon}
+                    </div>
                     <h3 className="text-xl font-semibold text-primary mb-2">{item.phase}</h3>
                     <p className="opacity-80">{item.desc}</p>
                   </div>
@@ -202,21 +204,21 @@ export default function CollaborationClient() {
                         title: "Enhanced Accessibility",
                         description: "Add clear labels to all icons and images",
                         icon: (
-                          <span className="material-symbols text-3xl">person</span>
+                          <span className="material-symbols text-4xl">person</span>
                         )
                       },
                       {
                         title: "Keyboard Navigation",
                         description: "Improve focus states and keyboard shortcuts",
                         icon: (
-                          <span className="material-symbols text-3xl">keyboard</span>
+                          <span className="material-symbols text-4xl">keyboard</span>
                         )
                       },
                       {
                         title: "Color Contrast",
                         description: "Enhance contrast ratios for better readability",
                         icon: (
-                          <span className="material-symbols text-3xl">palette</span>
+                          <span className="material-symbols text-4xl">palette</span>
                         )
                       }
                     ].map((item, index) => (
@@ -227,7 +229,11 @@ export default function CollaborationClient() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
-                        <div className="flex-shrink-0">{item.icon}</div>
+                        <div className="flex-shrink-0">
+                          <div className="h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
+                            {item.icon}
+                          </div>
+                        </div>
                         <div>
                           <h4 className="text-lg font-medium text-primary">{item.title}</h4>
                           <p className="text-opacity-80">{item.description}</p>
@@ -252,7 +258,7 @@ export default function CollaborationClient() {
                     goals: ["Streamline team communication", "Implement new marketing strategies"],
                     painPoints: ["Complex approval processes", "Scattered feedback channels"],
                     icon: (
-                      <span className="material-symbols text-3xl">groups</span>
+                      <span className="material-symbols text-4xl">groups</span>
                     )
                   },
                   {
@@ -263,7 +269,7 @@ export default function CollaborationClient() {
                     goals: ["Close deals faster", "Improve team coordination"],
                     painPoints: ["Limited mobile functionality", "Delayed responses"],
                     icon: (
-                      <span className="material-symbols text-3xl">groups</span>
+                      <span className="material-symbols text-4xl">groups</span>
                     )
                   }
                 ].map((persona, index) => (
@@ -273,7 +279,7 @@ export default function CollaborationClient() {
                     whileHover={{ y: -5 }}
                   >
                     <div className="flex items-center mb-6">
-                      <div className="p-3 text-purple-400 bg-purple-400/10 rounded-lg mr-4">
+                      <div className="h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mr-4">
                         {persona.icon}
                       </div>
                       <div>
@@ -346,28 +352,28 @@ export default function CollaborationClient() {
                         title: "Team Communication",
                         description: "Enable seamless real-time collaboration",
                         icon: (
-                          <span className="material-symbols text-3xl">group</span>
+                          <span className="material-symbols text-4xl">group</span>
                         )
                       },
                       {
                         title: "User Feedback Loop",
                         description: "Continuous collection of user insights",
                         icon: (
-                          <span className="material-symbols text-3xl">feedback</span>
+                          <span className="material-symbols text-4xl">feedback</span>
                         )
                       },
                       {
                         title: "Training Resources",
                         description: "Multi-level learning materials",
                         icon: (
-                          <span className="material-symbols text-3xl">school</span>
+                          <span className="material-symbols text-4xl">school</span>
                         )
                       },
                       {
                         title: "Documentation",
                         description: "Comprehensive support resources",
                         icon: (
-                          <span className="material-symbols text-3xl">description</span>
+                          <span className="material-symbols text-4xl">description</span>
                         )
                       }
                     ].map((req, index) => (
@@ -379,7 +385,7 @@ export default function CollaborationClient() {
                         transition={{ delay: index * 0.1 }}
                         whileHover={{ x: 10 }}
                       >
-                        <div className="flex-shrink-0 p-2 text-purple-400 bg-purple-400/10 rounded-lg">
+                        <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
                           {req.icon}
                         </div>
                         <div>
@@ -407,25 +413,25 @@ export default function CollaborationClient() {
                         {
                           area: "Usability",
                           icon: (
-                            <span className="material-symbols text-3xl">touch_app</span>
+                            <span className="material-symbols text-4xl">touch_app</span>
                           )
                         },
                         {
                           area: "Creativity",
                           icon: (
-                            <span className="material-symbols text-3xl">brush</span>
+                            <span className="material-symbols text-4xl">brush</span>
                           )
                         },
                         {
                           area: "Accessibility",
                           icon: (
-                            <span className="material-symbols text-3xl">accessibility</span>
+                            <span className="material-symbols text-4xl">accessibility</span>
                           )
                         },
                         {
                           area: "Visual Design",
                           icon: (
-                            <span className="material-symbols text-3xl">image</span>
+                            <span className="material-symbols text-4xl">image</span>
                           )
                         }
                       ].map((focus, index) => (
@@ -433,7 +439,7 @@ export default function CollaborationClient() {
                           key={index}
                           className="theme-card-flex p-4 rounded-lg hover:bg-theme/70 transition-all duration-300 transform hover:scale-105 flex flex-col items-center"
                         >
-                          <div className="p-2 text-purple-400 bg-purple-400/10 rounded-lg mb-2">
+                          <div className="h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg mb-2">
                             <div className="text-purple-400">
                               {focus.icon}
                             </div>
@@ -457,7 +463,7 @@ export default function CollaborationClient() {
                     description: "Interactive designs showcasing key features aligned with user goals and usability principles",
                     progress: 100,
                     icon: (
-                      <span className="material-symbols text-3xl">devices</span>
+                      <span className="material-symbols text-4xl">devices</span>
                     )
                   },
                   {
@@ -465,7 +471,7 @@ export default function CollaborationClient() {
                     description: "Structured feedback sessions with stakeholders to document key decisions and improvements",
                     progress: 100,
                     icon: (
-                      <span className="material-symbols text-3xl">reviews</span>
+                      <span className="material-symbols text-4xl">reviews</span>
                     )
                   },
                   {
@@ -473,7 +479,7 @@ export default function CollaborationClient() {
                     description: "Comprehensive testing across devices to ensure consistent experience and performance",
                     progress: 100,
                     icon: (
-                      <span className="material-symbols text-3xl">verified</span>
+                      <span className="material-symbols text-4xl">verified</span>
                     )
                   },
                   {
@@ -481,7 +487,7 @@ export default function CollaborationClient() {
                     description: "Comprehensive documentation for future development and cross-functional collaboration",
                     progress: 100,
                     icon: (
-                      <span className="material-symbols text-3xl">folder</span>
+                      <span className="material-symbols text-4xl">folder</span>
                     )
                   }
                 ].map((item, index) => (
@@ -494,7 +500,7 @@ export default function CollaborationClient() {
                     whileHover={{ y: -5 }}
                   >
                     <div className="flex items-start space-x-4">
-                      <div className="flex-shrink-0 p-3 text-purple-400 bg-purple-400/10 rounded-lg">
+                      <div className="flex-shrink-0 h-[68px] w-[68px] flex items-center justify-center text-purple-400 bg-purple-400/10 rounded-lg">
                         {item.icon}
                       </div>
                       <div className="flex-grow">
