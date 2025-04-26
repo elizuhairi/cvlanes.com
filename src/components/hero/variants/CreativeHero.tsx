@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import { Theme } from '@/context/ThemeContext';
+import QuoteBlock from '@/components/ui/QuoteBlock';
 
 interface CreativeHeroProps extends HeroConfig {
   theme?: Theme;
@@ -66,26 +67,12 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="relative max-w-3xl mx-auto mb-12"
+            className="relative max-w-4xl mx-auto mb-12"
           >
-            <div className={`relative ${isLight ? 'bg-gray-100/70' : 'bg-black/20'} backdrop-blur-sm ${isColorful ? 'rounded-2xl' : 'rounded-xl'} p-8`}>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2, duration: 0.8 }}
-                className={`text-xl italic ${isLight ? 'text-gray-700' : 'text-white'} relative z-20`}
-              >
-                {quote.text}
-              </motion.p>
-              <motion.span
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.4, duration: 0.6 }}
-                className="block text-blue-400 mt-4 text-right relative z-20"
-              >
-                — {quote.author}
-              </motion.span>
-            </div>
+            <QuoteBlock 
+              quote={quote.text}
+              author={quote.author}
+            />
           </motion.div>
         )}
 

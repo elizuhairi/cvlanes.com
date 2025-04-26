@@ -6,13 +6,14 @@ import Hero from '@/components/hero/Hero';
 import Card from '@/components/Card';
 import CardContent from '@/components/CardContent';
 import type { HeroConfig } from '@/types/hero';
+import QuoteBlock from "@/components/ui/QuoteBlock";
 
 const heroConfig: HeroConfig = {
   variant: 'creative',
   title: 'Product Owner & Design Leader',
-  subtitle: 'Transforming Ideas into Exceptional Digital Experiences',
+  subtitle: '',
   quote: {
-    text: 'Always remember to seek inspiration from the world around you. The smallest details and the foremost wonders can ignite a spark within your mind and lead you to create something exceptional. Allow your imagination to roam freely, unbound by limitations, and be fearless in pushing the boundaries of what is possible.',
+    text: 'The universe around you is a boundless canvas — from the tiniest wonders to the grandest stars, every detail holds the power to ignite brilliance within you. Let your imagination drift among galaxies, unchained and fearless, pushing beyond the edges of the possible. Dare to dream across the infinite, and you will create what was once thought unreachable.',
     author: 'Ali'
   },
   backgroundEffect: 'design-code',
@@ -163,9 +164,11 @@ const HomePage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-primary italic"
                 >
-                  &ldquo;Every pixel has a purpose, every interaction tells a story.&rdquo;
+                  <QuoteBlock 
+                    quote="Every pixel has a purpose, every interaction tells a story." 
+                    author="Ali"
+                  />
                 </motion.p>
 
                 <motion.p

@@ -14,13 +14,58 @@ interface BlogContentProps {
 
 // Helper function to convert markdown-style content to JSX
 function formatContent(content: string, slug: string, theme: string) {
-  // Special processing for the AI blog post
-  if (slug === 'primitive-human') {
-    return formatPrimitiveHumanContent(content, theme);
-  }
+  // Apply the same styling to all blog posts
+  return formatStylizedContent(content, theme);
+}
+
+// Renamed the primitive human formatter to a generic stylized formatter for all posts
+function formatStylizedContent(content: string, theme: string) {
+  const isLight = theme === 'light';
   
-  // For other blog posts, use the regular content formatter
-  return formatRegularContent(content);
+  // Split by sections - either chapters or major headings
+  const splitPattern = /Chapter\s+|^##\s+/im;
+  const hasSections = content.match(splitPattern);
+  
+  if (hasSections) {
+    // For content with explicit chapter-like sections
+    const parts = content.split(splitPattern);
+    const intro = parts[0];
+    
+    // Process introduction which includes the quote if present
+    const introContent = processIntroduction(intro);
+    
+    // Process remaining chapters/sections
+    const sections = parts.slice(1).map((section, index) => {
+      // Extract section title and content
+      const titleMatch = section.match(/^(.*?)\n/);
+      const title = titleMatch ? titleMatch[1].trim() : `Section ${index + 1}`;
+      const sectionContent = section.replace(/^.*?\n/, '').trim();
+      
+      // Process the section content
+      const formattedContent = processChapterContent(sectionContent);
+      
+      return (
+        <React.Fragment key={`section-${index}`}>
+          <ChapterDivider title={title} number={index} id={`section-${index}`} />
+          {formattedContent}
+        </React.Fragment>
+      );
+    });
+    
+    return (
+      <>
+        {introContent}
+        {sections}
+      </>
+    );
+  } else {
+    // For content without explicit sections, process as a whole
+    return (
+      <>
+        {processIntroduction(content)}
+      </>
+    );
+  }
 }
 
 // Create separate formatter functions to avoid Hook rules issues
@@ -145,106 +190,6 @@ function formatRegularContent(content: string) {
       </motion.p>
     );
   });
-}
-
-// Separate function to format the primitive-human blog content
-function formatPrimitiveHumanContent(content: string, theme: string) {
-  const isLight = theme === 'light';
-  
-  // Split by chapters or major sections
-  const parts = content.split(/Chapter\s+/i);
-  const intro = parts[0];
-  
-  // Process introduction which includes the quote
-  const introContent = processIntroduction(intro);
-  
-  // Process remaining chapters
-  const chapters = parts.slice(1).map((chapter, index) => {
-    // Extract chapter title and content
-    const titleMatch = chapter.match(/^(.*?)\n/);
-    const title = titleMatch ? titleMatch[1].trim() : `Chapter ${index + 1}`;
-    const chapterContent = chapter.replace(/^.*?\n/, '').trim();
-    
-    // Add appropriate images for each chapter
-    let chapterImage;
-    if (index === 0) { // Chapter Zero
-      chapterImage = <ImageSection 
-        src="/images/blog/ai-brain.jpg" 
-        alt="AI Brain Concept"
-        caption="Visualization of artificial neural networks - the foundation of modern AI"
-      />;
-    } else if (index === 1) { // 
-      chapterImage = <ImageSection 
-        src="/images/blog/human-ai.jpg" 
-        alt="Human and AI Interaction"
-        caption="The human element remains essential in the age of AI"
-        aspectRatio="tall"
-      />;
-    } else if (index === 2) { // Chapter Two
-      chapterImage = <ImageSection 
-        src="/images/blog/future-rules.jpg" 
-        alt="AI Ethics and Rules"
-        caption="Redefining societal rules for a future with advanced artificial intelligence"
-      />;
-    } else if (index === 3) { // Chapter Three
-      chapterImage = <ImageSection 
-        src="/images/blog/utopia.jpg" 
-        alt="Utopian Future Society"
-        caption="Envisioning a society where AI enhances human well-being"
-        aspectRatio="square"
-      />;
-    } else if (index === 4) { // Chapter Four
-      chapterImage = <ImageSection 
-        src="/images/blog/ai-impact.jpg" 
-        alt="AI Impact on Society"
-        caption="The widespread impact of AI on work and daily life"
-      />;
-    }
-    
-    // Process the chapter content
-    const formattedContent = processChapterContent(chapterContent);
-    
-    return (
-      <React.Fragment key={`chapter-${index}`}>
-        <ChapterDivider title={title} number={index} id={`chapter-${index}`} />
-        {chapterImage}
-        {formattedContent}
-      </React.Fragment>
-    );
-  });
-  
-  return (
-    <>
-      {introContent}
-      {chapters}
-      
-      {/* Final section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-        className="mt-16 mb-8 text-center"
-      >
-        <h2 className={`text-3xl font-bold mb-6 ${isLight ? 'text-gray-900' : 'text-white'}`}>
-          What is coming next?
-        </h2>
-        <p className="text-lg text-theme leading-relaxed max-w-3xl mx-auto mb-8">
-          Having discussed the significance of AI, it is worth noting that there is already an ideation of Artificial General Intelligence (AGI). AGI refers to a machine that can learn and comprehend any intellectual task that a human being can, and can even develop capabilities beyond the scope of traditional AI systems.
-        </p>
-        
-        <ImageSection 
-          src="/images/blog/agi-future.jpg" 
-          alt="Artificial General Intelligence"
-          caption="A glimpse into the potential future of Artificial General Intelligence"
-        />
-        
-        <p className="text-lg text-theme leading-relaxed max-w-3xl mx-auto mt-12 italic">
-          Finally, I want to express my gratitude for your patience and for taking the time to read this article in its entirety. If you have any questions, please don&apos;t hesitate to contact me anytime. I&apos;ll be more than happy to hear your feedback.
-        </p>
-      </motion.div>
-    </>
-  );
 }
 
 // Process the introduction section of the AI blog
