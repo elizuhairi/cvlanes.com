@@ -1,6 +1,6 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/hero/Hero';
 import Card from '@/components/Card';
@@ -23,11 +23,168 @@ const heroConfig: HeroConfig = {
   }
 };
 
-const HomePage = () => {
+// Interactive elements for the magical experience
+const FloatingElement = ({ children, className = "", delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ 
+      opacity: 1, 
+      y: 0,
+      x: [0, 10, 0, -10, 0],
+      rotate: [0, 5, 0, -5, 0],
+    }}
+    transition={{ 
+      opacity: { duration: 0.8, delay },
+      y: { duration: 0.8, delay },
+      x: { repeat: Infinity, duration: 15, ease: "easeInOut" },
+      rotate: { repeat: Infinity, duration: 20, ease: "easeInOut" },
+    }}
+    className={`${className}`}
+  >
+    {children}
+  </motion.div>
+);
+
+// Cursor follower effect component
+const CursorFollower = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      if (!isVisible) setIsVisible(true);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [isVisible]);
+
   return (
-    <main className="min-h-screen bg-theme text-theme">
+    <motion.div
+      className="hidden lg:block fixed w-64 h-64 pointer-events-none z-50"
+      animate={{ 
+        x: position.x - 128, 
+        y: position.y - 128,
+        opacity: isVisible ? 0.15 : 0
+      }}
+      transition={{ type: "spring", damping: 20, stiffness: 300 }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400 to-violet-500 rounded-full filter blur-3xl"></div>
+    </motion.div>
+  );
+};
+
+const MagicSparks = () => (
+  <>
+    {[...Array(15)].map((_, i) => (
+      <motion.div 
+        key={i}
+        className="absolute w-1 h-1 bg-yellow-300 rounded-full shadow-glow"
+        initial={{ 
+          x: Math.random() * window.innerWidth, 
+          y: Math.random() * window.innerHeight,
+          scale: 0,
+          opacity: 0
+        }}
+        animate={{ 
+          x: Math.random() * window.innerWidth, 
+          y: Math.random() * window.innerHeight,
+          scale: [0, 1.5, 0],
+          opacity: [0, 1, 0]
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 4 + Math.random() * 4,
+          delay: Math.random() * 2,
+          ease: "easeInOut" 
+        }}
+      />
+    ))}
+  </>
+);
+
+const InteractiveSkillCard = ({ skill, index }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="theme-card relative overflow-hidden group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <motion.div 
+        className="theme-card-content p-6 relative z-10 transition-all duration-300"
+        whileHover={{ 
+          y: -5,
+          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+        }}
+      >
+        <motion.h4 
+          className="text-xl font-semibold mb-2 text-primary"
+          animate={{ scale: isHovered ? 1.05 : 1 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          {skill.title}
+        </motion.h4>
+        <p className="opacity-70">{skill.desc}</p>
+        
+        {isHovered && (
+          <motion.div 
+            className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-fuchsia-600"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.3 }}
+          />
+        )}
+      </motion.div>
+      <div className="absolute inset-0 bg-primary/5 transform origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300" />
+    </motion.div>
+  );
+};
+
+const HomePage = () => {
+  const [activeSection, setActiveSection] = useState(null);
+  const [cursor, setCursor] = useState("default");
+  
+  // Parallax effect for background elements
+  const [scrollY, setScrollY] = useState(0);
+  
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <main className="min-h-screen bg-theme text-theme overflow-hidden">
+      {/* Cursor follower effect */}
+      <CursorFollower />
+      
+      {/* Interactive background elements */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <MagicSparks />
+        <div className="absolute top-[20%] right-[10%] opacity-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-600 blur-3xl"
+          style={{ transform: `translateY(${scrollY * 0.2}px)` }}
+        />
+        <div className="absolute top-[50%] left-[5%] opacity-10 w-96 h-96 rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-600 blur-3xl"
+          style={{ transform: `translateY(${scrollY * -0.15}px)` }}
+        />
+      </div>
+      
       <Navigation />
       <Hero config={heroConfig} />
+
+      {/* Floating decorative elements */}
+      <div className="relative pointer-events-none">
+        <FloatingElement className="absolute top-20 right-[10%] text-4xl">✨</FloatingElement>
+        <FloatingElement className="absolute top-40 left-[15%] text-4xl" delay={0.5}>🌟</FloatingElement>
+        <FloatingElement className="absolute top-60 right-[20%] text-3xl" delay={1.2}>💫</FloatingElement>
+      </div>
 
       {/* Work Experience Section */}
       <motion.section 
@@ -36,6 +193,7 @@ const HomePage = () => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
         className="py-20 bg-black/5 relative overflow-hidden"
+        onViewportEnter={() => setActiveSection("work")}
       >
         {/* Background decoration */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
@@ -143,19 +301,35 @@ const HomePage = () => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
         className="py-20 bg-black/5 relative overflow-hidden"
+        onViewportEnter={() => setActiveSection("about")}
       >
+        <motion.div 
+          className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-r from-cyan-500/20 to-fuchsia-600/20"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1.5 }}
+          viewport={{ once: true }}
+        />
+        
         <div className="container mx-auto px-4">
           <div className="relative">
             <div className="max-w-4xl mx-auto text-center">
-              <h3 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-cyan-500 to-fuchsia-600 bg-clip-text text-transparent">
+              <motion.h3 
+                className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-cyan-500 to-fuchsia-600 bg-clip-text text-transparent"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
                 Crafting Digital Dreams into Reality
-              </h3>
+              </motion.h3>
               
               <div className="space-y-6 text-lg text-theme opacity-80 leading-relaxed">
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
                 >
                   Hey there! I&apos;m Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents &ndash; from Damascus to Helsinki &ndash; I&apos;ve learned that great design is about more than just aesthetics; it&apos;s about touching hearts and solving real problems.
                 </motion.p>
@@ -164,6 +338,7 @@ const HomePage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
                 >
                   <QuoteBlock 
                     quote="Every pixel has a purpose, every interaction tells a story." 
@@ -176,6 +351,7 @@ const HomePage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
+                  viewport={{ once: true }}
                 >
                   Over the past decade, I&apos;ve had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical. ✨
                 </motion.p>
@@ -184,6 +360,7 @@ const HomePage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
+                  viewport={{ once: true }}
                   className="pt-4"
                 >
                   <span className="opacity-70">When I&apos;m not designing, you&apos;ll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone&apos;s digital life a little bit better.</span>
@@ -192,6 +369,14 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+        
+        <motion.div 
+          className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-r from-fuchsia-600/20 to-cyan-500/20"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1.5 }}
+          viewport={{ once: true }}
+        />
       </motion.section>
 
       {/* Skills Section */}
@@ -200,10 +385,39 @@ const HomePage = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-20"
+        className="py-20 relative"
+        onViewportEnter={() => setActiveSection("skills")}
+        onMouseEnter={() => setCursor("skills")}
+        onMouseLeave={() => setCursor("default")}
       >
+        <motion.div 
+          className="absolute inset-0 opacity-10"
+          animate={{ 
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity, 
+            repeatType: "reverse" 
+          }}
+          style={{
+            backgroundImage: 'radial-gradient(circle at center, cyan 0%, transparent 70%)',
+            backgroundSize: '80% 80%',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
+      
         <div className="container mx-auto px-4">
-          <h3 className="text-3xl font-bold mb-12 text-center">Strengths & Skills</h3>
+          <motion.h3 
+            className="text-3xl font-bold mb-12 text-center"
+            whileInView={{ 
+              textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 15px rgba(56, 189, 248, 0.5)", "0 0 0px rgba(0,0,0,0)"] 
+            }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+            viewport={{ once: true }}
+          >
+            Strengths & Skills
+          </motion.h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { title: 'UI/UX Design', desc: 'Expertise in Figma & Adobe CC' },
@@ -213,69 +427,142 @@ const HomePage = () => {
               { title: 'Test Management', desc: 'Proficient with Maze and Zephyr Scale' },
               { title: 'Tech Stack', desc: 'Web/mobile UI, WordPress, HubSpot, React JS' },
             ].map((skill, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="theme-card"
-              >
-                <div className="theme-card-content p-6 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
-                  <h4 className="text-xl font-semibold mb-2 text-primary">{skill.title}</h4>
-                  <p className="opacity-70">{skill.desc}</p>
-                </div>
-              </motion.div>
+              <InteractiveSkillCard key={index} skill={skill} index={index} />
             ))}
           </div>
         </div>
       </motion.section>
 
-      {/* Additional Sections */}
+      {/* Additional Info with 3D cards */}
       <motion.section 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-20 bg-black/5"
+        className="py-20 bg-black/5 relative overflow-hidden"
+        onViewportEnter={() => setActiveSection("additional")}
       >
         <div className="container mx-auto px-4">
           <h3 className="text-3xl font-bold mb-8 text-center">Additional Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="theme-card"
+              whileHover={{ 
+                scale: 1.02,
+                rotateY: 5,
+                rotateX: -5,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="theme-card transform perspective-1000"
             >
-              <div className="theme-card-content p-6">
+              <div className="theme-card-content p-6 relative">
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-fuchsia-600/5 rounded-lg transform -z-10" />
                 <h4 className="text-xl font-semibold mb-4 text-primary">Experience & Achievements</h4>
                 <ul className="space-y-2 opacity-80">
                   <li>• Professional journey and roles</li>
                   <li>• Key milestones and successes</li>
                 </ul>
+                <div className="absolute -bottom-4 -right-4 text-4xl opacity-20">🏆</div>
               </div>
             </motion.div>
             <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="theme-card"
+              whileHover={{ 
+                scale: 1.02,
+                rotateY: -5,
+                rotateX: -5,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="theme-card transform perspective-1000"
             >
-              <div className="theme-card-content p-6">
+              <div className="theme-card-content p-6 relative">
+                <div className="absolute inset-0 bg-gradient-to-tr from-fuchsia-600/5 to-cyan-500/5 rounded-lg transform -z-10" />
                 <h4 className="text-xl font-semibold mb-4 text-primary">Connect & Learn More</h4>
                 <ul className="space-y-2 opacity-80">
                   <li>• Social Media connections</li>
                   <li>• Recommendations and testimonials</li>
                   <li>• Blog insights and updates</li>
                 </ul>
+                <div className="absolute -bottom-4 -right-4 text-4xl opacity-20">🔗</div>
               </div>
             </motion.div>
           </div>
         </div>
+        
+        {/* Interactive dots pattern */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-primary/30 rounded-full"
+              initial={{ 
+                x: Math.random() * 100 + '%', 
+                y: Math.random() * 100 + '%',
+                opacity: 0.2 + Math.random() * 0.3
+              }}
+              animate={{ 
+                scale: [1, 1.5, 1],
+                opacity: [0.2 + Math.random() * 0.3, 0.5 + Math.random() * 0.3, 0.2 + Math.random() * 0.3]
+              }}
+              transition={{ 
+                duration: 2 + Math.random() * 3, 
+                repeat: Infinity,
+                delay: Math.random() * 2
+              }}
+            />
+          ))}
+        </div>
       </motion.section>
 
-      <footer className="bg-theme opacity-70 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
-        </div>
+      {/* Interactive footer with glowing effect */}
+      <footer className="bg-theme py-8 relative overflow-hidden">
+        <motion.div 
+          className="container mx-auto px-4 text-center relative z-10"
+          whileInView={{ 
+            textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 10px rgba(56, 189, 248, 0.3)", "0 0 0px rgba(0,0,0,0)"] 
+          }}
+          transition={{ duration: 2, repeat: Infinity }}
+          viewport={{ once: true }}
+        >
+          <p className="opacity-70">&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
+          <motion.div 
+            className="mt-4 opacity-50 text-sm"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.5 }}
+            transition={{ delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <p>Made with ✨ imagination and 💻 code</p>
+          </motion.div>
+        </motion.div>
+        
+        {/* Footer glow effect */}
+        <motion.div 
+          className="absolute bottom-0 left-0 right-0 h-[1px]" 
+          style={{
+            background: "linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3) 50%, transparent)",
+          }}
+          animate={{ left: ['-100%', '100%'] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+        />
       </footer>
+      
+      {/* Add styles for perspective and other effects */}
+      <style jsx global>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        .shadow-glow {
+          box-shadow: 0 0 8px rgba(255, 255, 200, 0.8);
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        .cursor-none {
+          cursor: none !important;
+        }
+      `}</style>
     </main>
   );
 };
