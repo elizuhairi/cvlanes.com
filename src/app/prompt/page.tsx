@@ -10,11 +10,13 @@ export default function PromptPage() {
         <div className="space-y-8">
           <PromptCard 
             status="Done" 
+            bugsFixed={3}
             content={`Create a comprehensive modernization plan for my React website using the latest Tailwind CSS practices and modern web design principles. The website consists of: 1. Introduction/Home Page: Implement a visually striking hero section with smooth animations, dynamic typography, gradient effects, and modern UI components. Include interactive elements, micro-interactions, and a responsive navbar with glass-morphism effects. 2. Blog Page: Design a modern blog layout with card-based content presentation, skeleton loading states, infinite scroll functionality, category filtering, and reading time estimates. Implement dark mode toggle and responsive grid layouts using Tailwind CSS Grid and Flexbox. 3. Portfolio Case Studies (2 entries): Create an immersive case study layout with parallax scrolling effects, interactive image galleries, progress indicators, and animated transitions between sections. Include hover effects, modern typography hierarchies, and clear call-to-action elements. Global Improvements: - Implement latest Tailwind CSS features including JIT compiler - Add smooth page transitions and loading states - Ensure responsive design across all device sizes - Include modern accessibility features - Optimize performance with lazy loading - Use modern color schemes and gradients - Implement container queries and fluid typography - Add subtle micro-animations and hover effects - Ensure consistent spacing using Tailwind's spacing system - Include modern scrolling experiences and animations Please. Follow this documentation of the tailwind: https://tailwindcss.com/plus/ui-blocks/documentation`}
           />
 
           <PromptCard 
             status="Done" 
+            bugsFixed={5}
             content={`Task Breakdown:
 • Use tailwind best practices #fetch: https://tailwindcss.com/plus/ui-blocks/documentation
 • Navigation Bar
@@ -37,6 +39,7 @@ Here is the post:
 
           <PromptCard 
             status="Done" 
+            bugsFixed="None"
             content={`Add Fonts using google fonts web:
 Headings
 • Poppins is better for headings.
@@ -48,6 +51,7 @@ It was designed for readability on screens, with a clean, neutral, and highly le
 
           <PromptCard 
             status="Done" 
+            bugsFixed={7}
             content={`Use Tailwind CSS best practices and follow the UI Blocks documentation:
 #fetch: https://tailwindcss.com/plus/ui-blocks/documentation
 
@@ -59,6 +63,7 @@ Replace my portfolio content with the following from the below sources:
 
           <PromptCard 
             status="Done" 
+            bugsFixed={2}
             content={`Unsplash.com integration
 Integrate with unsplash and use proper images for my portfolio
 Use best integration practices from #fetch https://unsplash.com/documentation`}
@@ -66,6 +71,7 @@ Use best integration practices from #fetch https://unsplash.com/documentation`}
 
           <PromptCard 
             status="Done" 
+            bugsFixed={1}
             content={`Hero Section (Based on Adham Dannaway's Site):
 • Fetch the hero effect from  #fetch https://www.adhamdannaway.com.
 • Use the image located at images/hero for the hero background.`}
@@ -73,16 +79,19 @@ Use best integration practices from #fetch https://unsplash.com/documentation`}
 
           <PromptCard 
             status="Done" 
+            bugsFixed={4}
             content={`Create a stunning and futuristic hero section that feels both unique and exceptional. Use animated Google Material Icons in the background to visually express the transformation of design into code. Take inspiration from Apple Vision Pro—craft something that feels ahead of its time.`}
           />
 
           <PromptCard 
             status="Done" 
+            bugsFixed={6}
             content={`Decouple the hero section from the homepage and make it dynamic, allowing it to be easily swapped based on different occasions or contexts. Integrate this flexibility into the homepage by providing an option to choose between multiple hero section variations. This approach simplifies the design process and enhances adaptability.`}
           />
 
           <PromptCard 
             status="Failed" 
+            bugsFixed="None"
             content={`Rebuild my portfolio content using all the material from the sources provided below. Each portfolio entry should include the full content from its respective source, showcasing the complete design process, key decisions, and case studies. Incorporate the provided images as representations of the final website or product interface.
 urls:
 #fetch: https://cvlanes.com/portfolio/collaboration
@@ -91,6 +100,7 @@ urls:
 
           <PromptCard 
             status="Done" 
+            bugsFixed={9}
             content={`Rebuild my collaboration content using all the material from the content provided below. Each portfolio entry should include the full content from its respective source, showcasing the complete process. 
 Remember this is case study or user journey of a future product design that offers an insight into a possible solution.
 Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/documentation`}
@@ -98,6 +108,7 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
 
           <PromptCard 
             status="Done" 
+            bugsFixed={3}
             content={`// In the navigation bar when clicked on the "Portfolio" it should go to the list of portfolios
 
 // Rebuild my jobseeking content using all the material from the content provided below. Each portfolio entry should include the full content from its respective source, showcasing the complete process. 
@@ -107,6 +118,7 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
 
           <PromptCard 
             status="Done" 
+            bugsFixed={8}
             content={`// In the navigation bar when clicked on the "Portfolio" it should go to the list of portfolios
 // Make the navigation bar responsive using CSS/JavaScript. Use tailwind best practices #fetch: https://tailwindcss.com/plus/ui-blocks/documentation
 // Add a dropdown menu to the "Portfolio" navigation item that displays a list of available portfolios when clicked.`}
@@ -114,6 +126,7 @@ Use tailwind best practice: #fetch: https://tailwindcss.com/plus/ui-blocks/docum
 
           <PromptCard 
             status="Done" 
+            bugsFixed={5}
             content={`Website global Theme Switcher (Light/Dark/Colorful):
 // Use tailwind best practices @https://tailwindcss.com/plus/ui-blocks/documentation
 // consider compatibility with the current version of next.js 
@@ -239,20 +252,26 @@ Blog Page & Header UI – Prompt Instructions:
 type PromptCardProps = {
   status: 'Done' | 'Failed';
   content: string;
+  bugsFixed?: number | 'None';
 };
 
-function PromptCard({ status, content }: PromptCardProps) {
+function PromptCard({ status, content, bugsFixed = 'None' }: PromptCardProps) {
   return (
     <div className="border border-gray-200 rounded-lg p-6 shadow-md">
       <div className="flex justify-between items-start mb-4">
-        <div 
-          className={`px-3 py-1 text-sm font-medium rounded-full ${
-            status === 'Done' 
-              ? 'bg-green-100 text-green-800' 
-              : 'bg-red-100 text-red-800'
-          }`}
-        >
-          {status}
+        <div className="flex flex-col gap-2">
+          <div 
+            className={`px-3 py-1 text-sm font-medium rounded-full ${
+              status === 'Done' 
+                ? 'bg-green-100 text-green-800' 
+                : 'bg-red-100 text-red-800'
+            }`}
+          >
+            {status}
+          </div>
+          <div className="px-3 py-1 text-sm font-medium rounded-full bg-blue-100 text-blue-800">
+            Bugs Fixed: {bugsFixed}
+          </div>
         </div>
       </div>
       <div className="whitespace-pre-wrap text-gray-500">
