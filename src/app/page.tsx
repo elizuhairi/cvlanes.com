@@ -147,7 +147,7 @@ const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="relative">
             <div className="max-w-4xl mx-auto text-center">
-              <h3 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <h3 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-cyan-500 to-fuchsia-600 bg-clip-text text-transparent">
                 Crafting Digital Dreams into Reality
               </h3>
               
@@ -160,7 +160,7 @@ const HomePage = () => {
                   Hey there! I&apos;m Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents &ndash; from Damascus to Helsinki &ndash; I&apos;ve learned that great design is about more than just aesthetics; it&apos;s about touching hearts and solving real problems.
                 </motion.p>
 
-                <motion.p
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -168,8 +168,9 @@ const HomePage = () => {
                   <QuoteBlock 
                     quote="Every pixel has a purpose, every interaction tells a story." 
                     author="Ali"
+                    variant="default"
                   />
-                </motion.p>
+                </motion.div>
 
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}

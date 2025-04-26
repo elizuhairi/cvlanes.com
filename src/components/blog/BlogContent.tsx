@@ -73,39 +73,80 @@ function formatRegularContent(content: string) {
   return content.split('\n\n').map((block, index) => {
     const trimmedBlock = block.trim();
     
-    // Headings
-    if (trimmedBlock.startsWith('##') && !trimmedBlock.startsWith('###')) {
-      return (
-        <motion.h2 
-          key={index} 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-2xl font-bold mt-10 mb-5 text-primary"
-        >
-          {trimmedBlock.replace('## ', '')}
-        </motion.h2>
-      );
+    // Skip empty blocks
+    if (!trimmedBlock) return null;
+    
+    // Headings (h1, h2, h3)
+    if (trimmedBlock.startsWith('#')) {
+      // H1 heading
+      if (trimmedBlock.startsWith('# ')) {
+        return (
+          <motion.h1 
+            key={index} 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl font-bold mt-12 mb-6 text-primary"
+          >
+            {trimmedBlock.replace(/^# /, '')}
+          </motion.h1>
+        );
+      }
+      
+      // H2 heading
+      if (trimmedBlock.startsWith('## ')) {
+        return (
+          <motion.h2 
+            key={index} 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-2xl font-bold mt-10 mb-5 text-primary"
+          >
+            {trimmedBlock.replace(/^## /, '')}
+          </motion.h2>
+        );
+      }
+      
+      // H3 heading
+      if (trimmedBlock.startsWith('### ')) {
+        return (
+          <motion.h3 
+            key={index} 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-xl font-semibold mt-8 mb-4 text-primary"
+          >
+            {trimmedBlock.replace(/^### /, '')}
+          </motion.h3>
+        );
+      }
+      
+      // H4 heading
+      if (trimmedBlock.startsWith('#### ')) {
+        return (
+          <motion.h4 
+            key={index} 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg font-semibold mt-6 mb-3 text-primary"
+          >
+            {trimmedBlock.replace(/^#### /, '')}
+          </motion.h4>
+        );
+      }
     }
     
-    if (trimmedBlock.startsWith('###')) {
-      return (
-        <motion.h3 
-          key={index} 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-xl font-semibold mt-8 mb-4 text-primary"
-        >
-          {trimmedBlock.replace('### ', '')}
-        </motion.h3>
-      );
-    }
-    
-    // Lists
-    if (trimmedBlock.startsWith('*')) {
+    // Unordered Lists
+    if (trimmedBlock.match(/^[*\-] /m)) {
+      const items = trimmedBlock.split('\n').filter(line => line.trim().match(/^[*\-] /));
+      
       return (
         <motion.ul 
           key={index} 
@@ -115,16 +156,38 @@ function formatRegularContent(content: string) {
           transition={{ delay: 0.1 }}
           className="list-disc pl-6 mb-6 space-y-2"
         >
-          {trimmedBlock.split('\n').map((item, i) => (
+          {items.map((item, i) => (
             <li key={i} className="text-theme">
-              {item.replace('* ', '')}
+              {item.replace(/^[*\-] /, '')}
             </li>
           ))}
         </motion.ul>
       );
     }
     
-    // Numbered points
+    // Ordered Lists
+    if (trimmedBlock.match(/^\d+\. /m)) {
+      const items = trimmedBlock.split('\n').filter(line => line.trim().match(/^\d+\. /));
+      
+      return (
+        <motion.ol 
+          key={index} 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="list-decimal pl-6 mb-6 space-y-2"
+        >
+          {items.map((item, i) => (
+            <li key={i} className="text-theme">
+              {item.replace(/^\d+\. /, '')}
+            </li>
+          ))}
+        </motion.ol>
+      );
+    }
+    
+    // Simple numbered points (e.g., "1. Title\nDescription")
     if (trimmedBlock.match(/^\d\./)) {
       return (
         <motion.div 
@@ -160,19 +223,83 @@ function formatRegularContent(content: string) {
       );
     }
     
-    // Blockquotes
+    // Blockquotes with QuoteBlock component
     if (trimmedBlock.startsWith('>')) {
+      const quoteContent = trimmedBlock.replace(/^>\s?/, '').replace(/\n>\s?/g, '\n');
+      
+      // Detect if there's an author attribution in the format "> Quote text\n> — Author"
+      const authorMatch = quoteContent.match(/\n—\s*(.+)$/);
+      
+      if (authorMatch) {
+        const quote = quoteContent.replace(/\n—\s*.+$/, '');
+        const author = authorMatch[1];
+        return (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <QuoteBlock quote={quote} author={author} variant="default" />
+          </motion.div>
+        );
+      } else {
+        return (
+          <motion.div 
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <QuoteBlock quote={quoteContent} variant="default" />
+          </motion.div>
+        );
+      }
+    }
+    
+    // Emphasis (italic)
+    if (trimmedBlock.includes('*') && !trimmedBlock.startsWith('*')) {
+      const parts = trimmedBlock.split(/(\*[^*]+\*)/g);
       return (
-        <motion.blockquote 
+        <motion.p 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="pl-4 border-l-4 border-primary italic my-6 text-lg text-theme"
+          className="mb-6 text-lg text-theme leading-relaxed"
         >
-          {trimmedBlock.replace('> ', '')}
-        </motion.blockquote>
+          {parts.map((part, i) => {
+            if (part.startsWith('*') && part.endsWith('*')) {
+              return <em key={i}>{part.slice(1, -1)}</em>;
+            }
+            return part;
+          })}
+        </motion.p>
+      );
+    }
+    
+    // Strong emphasis (bold)
+    if (trimmedBlock.includes('**')) {
+      const parts = trimmedBlock.split(/(\*\*[^*]+\*\*)/g);
+      return (
+        <motion.p 
+          key={index} 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="mb-6 text-lg text-theme leading-relaxed"
+        >
+          {parts.map((part, i) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+              return <strong key={i}>{part.slice(2, -2)}</strong>;
+            }
+            return part;
+          })}
+        </motion.p>
       );
     }
     
@@ -199,6 +326,11 @@ function processIntroduction(intro: string) {
   const quoteLine = lines[1]?.trim() || '';
   const remainingContent = lines.slice(2).join('\n\n').trim();
   
+  // Check if the second line is a proper quote or just a regular paragraph
+  const isQuote = quoteLine.startsWith('>') || 
+                 (quoteLine.startsWith('"') && quoteLine.endsWith('"')) ||
+                 (quoteLine.startsWith('"') && quoteLine.endsWith('"'));
+  
   return (
     <>
       <motion.h1
@@ -212,59 +344,46 @@ function processIntroduction(intro: string) {
         {title}
       </motion.h1>
       
-      <QuoteBlock quote={quoteLine} author="Ali" />
+      {quoteLine && (
+        isQuote ? (
+          <QuoteBlock 
+            quote={quoteLine.startsWith('>') ? quoteLine.substring(1).trim() : quoteLine} 
+            author="Ali" 
+            variant="default"
+          />
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="max-w-3xl mx-auto mb-8 text-center"
+          >
+            <p className="text-xl text-theme leading-relaxed italic">
+              {quoteLine}
+            </p>
+          </motion.div>
+        )
+      )}
       
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2 }}
-        className="max-w-3xl mx-auto mb-16"
-      >
-        <p className="text-lg text-theme leading-relaxed">
-          {remainingContent}
-        </p>
-      </motion.div>
+      {remainingContent && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="max-w-3xl mx-auto mb-16"
+        >
+          {formatRegularContent(remainingContent)}
+        </motion.div>
+      )}
     </>
   );
 }
 
 // Process chapter content to enhance formatting
 function processChapterContent(content: string) {
-  const paragraphs = content.split('\n\n');
-  
-  return paragraphs.map((paragraph, index) => {
-    if (!paragraph.trim()) return null;
-    
-    // Check if this is a subheading within a chapter
-    if (paragraph.match(/^[A-Z][\w\s]+$/)) {
-      return (
-        <motion.h3
-          key={`subhead-${index}`}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-2xl font-bold mt-10 mb-6 text-primary"
-        >
-          {paragraph}
-        </motion.h3>
-      );
-    }
-    
-    return (
-      <motion.p
-        key={`para-${index}`}
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-        className="mb-6 text-lg text-theme leading-relaxed max-w-3xl mx-auto"
-      >
-        {paragraph}
-      </motion.p>
-    );
-  });
+  return formatRegularContent(content);
 }
 
 // Main component

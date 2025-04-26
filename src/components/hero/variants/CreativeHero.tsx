@@ -42,7 +42,7 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
                     duration: 0.8,
                     ease: [0.19, 1, 0.22, 1]
                   }}
-                  className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 relative"
+                  className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative"
                 >
                   {word}
                 </motion.span>
@@ -72,6 +72,7 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
             <QuoteBlock 
               quote={quote.text}
               author={quote.author}
+              variant="default"
             />
           </motion.div>
         )}
