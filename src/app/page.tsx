@@ -24,7 +24,7 @@ const heroConfig: HeroConfig = {
 };
 
 // Interactive elements for the magical experience
-const FloatingElement = ({ children, className = "", delay = 0 }) => (
+const FloatingElement = ({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ 
@@ -51,7 +51,7 @@ const CursorFollower = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
     };
@@ -75,36 +75,7 @@ const CursorFollower = () => {
   );
 };
 
-const MagicSparks = () => (
-  <>
-    {[...Array(15)].map((_, i) => (
-      <motion.div 
-        key={i}
-        className="absolute w-1 h-1 bg-yellow-300 rounded-full shadow-glow"
-        initial={{ 
-          x: Math.random() * window.innerWidth, 
-          y: Math.random() * window.innerHeight,
-          scale: 0,
-          opacity: 0
-        }}
-        animate={{ 
-          x: Math.random() * window.innerWidth, 
-          y: Math.random() * window.innerHeight,
-          scale: [0, 1.5, 0],
-          opacity: [0, 1, 0]
-        }}
-        transition={{ 
-          repeat: Infinity, 
-          duration: 4 + Math.random() * 4,
-          delay: Math.random() * 2,
-          ease: "easeInOut" 
-        }}
-      />
-    ))}
-  </>
-);
-
-const InteractiveSkillCard = ({ skill, index }) => {
+const InteractiveSkillCard = ({ skill, index }: { skill: { title: string, desc: string }, index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -148,16 +119,46 @@ const InteractiveSkillCard = ({ skill, index }) => {
 };
 
 const HomePage = () => {
-  const [activeSection, setActiveSection] = useState(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const [cursor, setCursor] = useState("default");
   
   // Parallax effect for background elements
   const [scrollY, setScrollY] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   
   useEffect(() => {
+    // Only run on client-side
+    if (typeof window === 'undefined') return;
+    
+    // Smooth mouse tracking
+    const handleMouseMove = (e: MouseEvent) => {
+      // Using lerp (linear interpolation) for smoother movement
+      const newX = e.clientX / window.innerWidth - 0.5;
+      const newY = e.clientY / window.innerHeight - 0.5;
+      
+      setMousePos(prev => ({
+        x: prev.x + (newX - prev.x) * 0.1, // Adjust 0.1 for different smoothness
+        y: prev.y + (newY - prev.y) * 0.1
+      }));
+    };
+    
     const handleScroll = () => setScrollY(window.scrollY);
+    
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
+    
+    // Animation frame for smoother updates
+    let animationFrameId: number;
+    const updateMousePosition = () => {
+      animationFrameId = requestAnimationFrame(updateMousePosition);
+    };
+    updateMousePosition();
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
@@ -166,26 +167,26 @@ const HomePage = () => {
       <CursorFollower />
       
       {/* Interactive background elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <MagicSparks />
-        <div className="absolute top-[20%] right-[10%] opacity-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-600 blur-3xl"
-          style={{ transform: `translateY(${scrollY * 0.2}px)` }}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-[-1]">
+        <div 
+          className="absolute top-[20%] right-[10%] opacity-10 w-64 h-64 rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-600 blur-3xl"
+          style={{ 
+            transform: `translateY(${scrollY * 0.2}px) translateX(${mousePos.x * 40}px)`,
+            transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
+          }}
         />
-        <div className="absolute top-[50%] left-[5%] opacity-10 w-96 h-96 rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-600 blur-3xl"
-          style={{ transform: `translateY(${scrollY * -0.15}px)` }}
+        <div 
+          className="absolute top-[50%] left-[5%] opacity-10 w-96 h-96 rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-600 blur-3xl"
+          style={{ 
+            transform: `translateY(${scrollY * -0.15}px) translateX(${mousePos.x * -40}px)`,
+            transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)'
+          }}
         />
       </div>
       
       <Navigation />
       <Hero config={heroConfig} />
-
-      {/* Floating decorative elements */}
-      <div className="relative pointer-events-none">
-        <FloatingElement className="absolute top-20 right-[10%] text-4xl">✨</FloatingElement>
-        <FloatingElement className="absolute top-40 left-[15%] text-4xl" delay={0.5}>🌟</FloatingElement>
-        <FloatingElement className="absolute top-60 right-[20%] text-3xl" delay={1.2}>💫</FloatingElement>
-      </div>
-
+      
       {/* Work Experience Section */}
       <motion.section 
         initial={{ opacity: 0 }}
@@ -353,7 +354,7 @@ const HomePage = () => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
                 >
-                  Over the past decade, I&apos;ve had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical. ✨
+                  Over the past decade, I&apos;ve had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical.
                 </motion.p>
 
                 <motion.div
@@ -487,30 +488,6 @@ const HomePage = () => {
               </div>
             </motion.div>
           </div>
-        </div>
-        
-        {/* Interactive dots pattern */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-primary/30 rounded-full"
-              initial={{ 
-                x: Math.random() * 100 + '%', 
-                y: Math.random() * 100 + '%',
-                opacity: 0.2 + Math.random() * 0.3
-              }}
-              animate={{ 
-                scale: [1, 1.5, 1],
-                opacity: [0.2 + Math.random() * 0.3, 0.5 + Math.random() * 0.3, 0.2 + Math.random() * 0.3]
-              }}
-              transition={{ 
-                duration: 2 + Math.random() * 3, 
-                repeat: Infinity,
-                delay: Math.random() * 2
-              }}
-            />
-          ))}
         </div>
       </motion.section>
 
