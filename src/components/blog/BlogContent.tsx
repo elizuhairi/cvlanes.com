@@ -84,8 +84,7 @@ function formatRegularContent(content: string) {
           <motion.h1 
             key={index} 
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-3xl font-bold mt-12 mb-6 text-primary"
           >
@@ -100,8 +99,7 @@ function formatRegularContent(content: string) {
           <motion.h2 
             key={index} 
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-2xl font-bold mt-10 mb-5 text-primary"
           >
@@ -116,8 +114,7 @@ function formatRegularContent(content: string) {
           <motion.h3 
             key={index} 
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-xl font-semibold mt-8 mb-4 text-primary"
           >
@@ -132,8 +129,7 @@ function formatRegularContent(content: string) {
           <motion.h4 
             key={index} 
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-lg font-semibold mt-6 mb-3 text-primary"
           >
@@ -151,8 +147,7 @@ function formatRegularContent(content: string) {
         <motion.ul 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="list-disc pl-6 mb-6 space-y-2"
         >
@@ -173,8 +168,7 @@ function formatRegularContent(content: string) {
         <motion.ol 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="list-decimal pl-6 mb-6 space-y-2"
         >
@@ -193,8 +187,7 @@ function formatRegularContent(content: string) {
         <motion.div 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-6"
         >
@@ -211,8 +204,7 @@ function formatRegularContent(content: string) {
         <motion.div 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-6"
         >
@@ -237,8 +229,7 @@ function formatRegularContent(content: string) {
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
             <QuoteBlock quote={quote} author={author} variant="default" />
@@ -249,8 +240,7 @@ function formatRegularContent(content: string) {
           <motion.div 
             key={index}
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
             <QuoteBlock quote={quoteContent} variant="default" />
@@ -266,8 +256,7 @@ function formatRegularContent(content: string) {
         <motion.p 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-6 text-lg text-theme leading-relaxed"
         >
@@ -288,8 +277,7 @@ function formatRegularContent(content: string) {
         <motion.p 
           key={index} 
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-6 text-lg text-theme leading-relaxed"
         >
@@ -308,8 +296,7 @@ function formatRegularContent(content: string) {
       <motion.p 
         key={index} 
         initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         className="mb-6 text-lg text-theme leading-relaxed"
       >
@@ -336,8 +323,7 @@ function processIntroduction(intro: string) {
       <motion.h1
         id="top"
         initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         className="text-3xl font-bold mb-10 text-center text-primary"
       >
@@ -354,8 +340,7 @@ function processIntroduction(intro: string) {
         ) : (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="max-w-3xl mx-auto mb-8 text-center"
           >
@@ -369,8 +354,7 @@ function processIntroduction(intro: string) {
       {remainingContent && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="max-w-3xl mx-auto mb-16"
         >

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useAnimation, useMotionValue, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { HeroConfig } from '@/types/hero';
 import Link from 'next/link';
 import { Theme } from '@/context/ThemeContext';
@@ -42,7 +42,6 @@ const ParticleField = ({ count = 20 }) => {
 const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta, theme = 'dark' }) => {
   const words = title.split(' ');
   const isLight = theme === 'light';
-  const isColorful = theme === 'colorful';
   
   // Mouse-follow effect for 3D perspective
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -98,13 +97,8 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
                     duration: 0.8,
                     ease: [0.19, 1, 0.22, 1]
                   }}
-                  className={`inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative ${hoveredIndex === i ? 'glow-text' : ''}`}
-                  onMouseEnter={() => setHoveredIndex(i)}
-                  onMouseLeave={() => setHoveredIndex(-1)}
-                  whileHover={{ 
-                    scale: 1.05, 
-                    textShadow: "0 0 8px rgba(0, 200, 255, 0.5)" 
-                  }}
+                  className={`inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative `}
+
                 >
                   {word}
                   {hoveredIndex === i && (

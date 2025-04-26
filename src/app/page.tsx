@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/hero/Hero';
 import Card from '@/components/Card';
@@ -81,9 +81,8 @@ const InteractiveSkillCard = ({ skill, index }: { skill: { title: string, desc: 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      viewport={{ once: true }}
       className="theme-card relative overflow-hidden group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -119,9 +118,6 @@ const InteractiveSkillCard = ({ skill, index }: { skill: { title: string, desc: 
 };
 
 const HomePage = () => {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [cursor, setCursor] = useState("default");
-  
   // Parallax effect for background elements
   const [scrollY, setScrollY] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -190,11 +186,9 @@ const HomePage = () => {
       {/* Work Experience Section */}
       <motion.section 
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
         className="py-20 bg-black/5 relative overflow-hidden"
-        onViewportEnter={() => setActiveSection("work")}
       >
         {/* Background decoration */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
@@ -298,18 +292,15 @@ const HomePage = () => {
       {/* About Section */}
       <motion.section 
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
         className="py-20 bg-black/5 relative overflow-hidden"
-        onViewportEnter={() => setActiveSection("about")}
       >
         <motion.div 
           className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-r from-cyan-500/20 to-fuchsia-600/20"
           initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
+          animate={{ scaleX: 1 }}
           transition={{ duration: 1.5 }}
-          viewport={{ once: true }}
         />
         
         <div className="container mx-auto px-4">
@@ -318,9 +309,8 @@ const HomePage = () => {
               <motion.h3 
                 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-cyan-500 to-fuchsia-600 bg-clip-text text-transparent"
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
               >
                 Crafting Digital Dreams into Reality
               </motion.h3>
@@ -328,18 +318,16 @@ const HomePage = () => {
               <div className="space-y-6 text-lg text-theme opacity-80 leading-relaxed">
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
                 >
                   Hey there! I&apos;m Ali, a passionate dreamer and creative soul who believes in the power of design to transform ideas into meaningful experiences. With my journey spanning across continents &ndash; from Damascus to Helsinki &ndash; I&apos;ve learned that great design is about more than just aesthetics; it&apos;s about touching hearts and solving real problems.
                 </motion.p>
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true }}
                 >
                   <QuoteBlock 
                     quote="Every pixel has a purpose, every interaction tells a story." 
@@ -350,18 +338,16 @@ const HomePage = () => {
 
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
                 >
                   Over the past decade, I&apos;ve had the joy of breathing life into countless digital products, always guided by the Double Diamond approach but colored with my own creative flair. I believe in making technology feel more human, more accessible, and maybe even a little magical.
                 </motion.p>
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: true }}
                   className="pt-4"
                 >
                   <span className="opacity-70">When I&apos;m not designing, you&apos;ll find me exploring new technologies, sharing knowledge with fellow designers, or simply dreaming up the next big idea that could make someone&apos;s digital life a little bit better.</span>
@@ -374,22 +360,17 @@ const HomePage = () => {
         <motion.div 
           className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-r from-fuchsia-600/20 to-cyan-500/20"
           initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
+          animate={{ scaleX: 1 }}
           transition={{ duration: 1.5 }}
-          viewport={{ once: true }}
         />
       </motion.section>
 
       {/* Skills Section */}
       <motion.section 
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
         className="py-20 relative"
-        onViewportEnter={() => setActiveSection("skills")}
-        onMouseEnter={() => setCursor("skills")}
-        onMouseLeave={() => setCursor("default")}
       >
         <motion.div 
           className="absolute inset-0 opacity-10"
@@ -411,11 +392,10 @@ const HomePage = () => {
         <div className="container mx-auto px-4">
           <motion.h3 
             className="text-3xl font-bold mb-12 text-center"
-            whileInView={{ 
+            animate={{ 
               textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 15px rgba(56, 189, 248, 0.5)", "0 0 0px rgba(0,0,0,0)"] 
             }}
             transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-            viewport={{ once: true }}
           >
             Strengths & Skills
           </motion.h3>
@@ -437,11 +417,9 @@ const HomePage = () => {
       {/* Additional Info with 3D cards */}
       <motion.section 
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
         className="py-20 bg-black/5 relative overflow-hidden"
-        onViewportEnter={() => setActiveSection("additional")}
       >
         <div className="container mx-auto px-4">
           <h3 className="text-3xl font-bold mb-8 text-center">Additional Information</h3>
@@ -495,19 +473,17 @@ const HomePage = () => {
       <footer className="bg-theme py-8 relative overflow-hidden">
         <motion.div 
           className="container mx-auto px-4 text-center relative z-10"
-          whileInView={{ 
+          animate={{ 
             textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 10px rgba(56, 189, 248, 0.3)", "0 0 0px rgba(0,0,0,0)"] 
           }}
           transition={{ duration: 2, repeat: Infinity }}
-          viewport={{ once: true }}
         >
           <p className="opacity-70">&copy; {new Date().getFullYear()} Ali Al-Zuhairi. All rights reserved.</p>
           <motion.div 
             className="mt-4 opacity-50 text-sm"
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.5 }}
+            animate={{ opacity: 0.5 }}
             transition={{ delay: 0.5 }}
-            viewport={{ once: true }}
           >
             <p>Made with ✨ imagination and 💻 code</p>
           </motion.div>
