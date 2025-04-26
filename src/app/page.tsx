@@ -23,28 +23,6 @@ const heroConfig: HeroConfig = {
   }
 };
 
-// Interactive elements for the magical experience
-const FloatingElement = ({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ 
-      opacity: 1, 
-      y: 0,
-      x: [0, 10, 0, -10, 0],
-      rotate: [0, 5, 0, -5, 0],
-    }}
-    transition={{ 
-      opacity: { duration: 0.8, delay },
-      y: { duration: 0.8, delay },
-      x: { repeat: Infinity, duration: 15, ease: "easeInOut" },
-      rotate: { repeat: Infinity, duration: 20, ease: "easeInOut" },
-    }}
-    className={`${className}`}
-  >
-    {children}
-  </motion.div>
-);
-
 // Cursor follower effect component
 const CursorFollower = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });

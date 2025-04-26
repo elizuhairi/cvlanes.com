@@ -62,9 +62,6 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
   
-  // Hover animation for title
-  const [hoveredIndex, setHoveredIndex] = useState(-1);
-  
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -97,18 +94,9 @@ const CreativeHero: React.FC<CreativeHeroProps> = ({ title, subtitle, quote, cta
                     duration: 0.8,
                     ease: [0.19, 1, 0.22, 1]
                   }}
-                  className={`inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative `}
-
+                  className="inline-block mx-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-fuchsia-600 relative"
                 >
                   {word}
-                  {hoveredIndex === i && (
-                    <motion.div 
-                      className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-fuchsia-600"
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
                 </motion.span>
               ))}
             </h2>

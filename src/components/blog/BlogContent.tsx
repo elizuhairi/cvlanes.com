@@ -2,26 +2,21 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from '@/context/ThemeContext';
 import QuoteBlock from '../ui/QuoteBlock';
 import ChapterDivider from '../ui/ChapterDivider';
-import ImageSection from '../ui/ImageSection';
 
 interface BlogContentProps {
   content: string;
-  slug: string;
 }
 
 // Helper function to convert markdown-style content to JSX
-function formatContent(content: string, slug: string, theme: string) {
+function formatContent(content: string) {
   // Apply the same styling to all blog posts
-  return formatStylizedContent(content, theme);
+  return formatStylizedContent(content);
 }
 
 // Renamed the primitive human formatter to a generic stylized formatter for all posts
-function formatStylizedContent(content: string, theme: string) {
-  const isLight = theme === 'light';
-  
+function formatStylizedContent(content: string) {
   // Split by sections - either chapters or major headings
   const splitPattern = /Chapter\s+|^##\s+/im;
   const hasSections = content.match(splitPattern);
@@ -371,13 +366,12 @@ function processChapterContent(content: string) {
 }
 
 // Main component
-const BlogContent: React.FC<BlogContentProps> = ({ content, slug }) => {
-  const { theme } = useTheme();
+const BlogContent: React.FC<BlogContentProps> = ({ content }) => {
   const [fullContent, setFullContent] = useState<React.ReactNode>([]);
 
   useEffect(() => {
-    setFullContent(formatContent(content, slug, theme));
-  }, [content, slug, theme]);
+    setFullContent(formatContent(content));
+  }, [content]);
 
   return (
     <div className="max-w-4xl mx-auto px-4 pt-8 pb-16">
