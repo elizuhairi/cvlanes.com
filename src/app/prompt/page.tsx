@@ -5,9 +5,15 @@ export default function PromptPage() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <div className="max-w-6xl mx-auto px-4 py-16 pt-32">
-        <h1 className="text-4xl font-bold mb-8">Project Prompts</h1>
-        <div className="space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-32">
+        <header className="mb-12 text-center">
+          <h1 className="text-5xl font-bold mb-4">Project Prompts</h1>
+          <p className="text-xl max-w-3xl mx-auto">
+            A collection of development tasks and their implementation status.
+          </p>
+        </header>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <PromptCard 
             status="Done" 
             bugsFixed={3}
@@ -257,9 +263,13 @@ type PromptCardProps = {
 
 function PromptCard({ status, content, bugsFixed = 'None' }: PromptCardProps) {
   return (
-    <div className="border border-gray-200 rounded-lg p-6 shadow-md">
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex flex-col gap-2">
+    <div className="theme-card-content p-6 relative z-10 transition-all duration-300 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 h-full">
+      <div className="flex flex-col mb-4">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold">
+            {content.split('\n')[0].replace(/[•○]/g, '').substring(0, 60)}
+            {content.split('\n')[0].length > 60 ? '...' : ''}
+          </h3>
           <div 
             className={`px-3 py-1 text-sm font-medium rounded-full ${
               status === 'Done' 
@@ -269,12 +279,14 @@ function PromptCard({ status, content, bugsFixed = 'None' }: PromptCardProps) {
           >
             {status}
           </div>
-          <div className="px-3 py-1 text-sm font-medium rounded-full bg-blue-100 text-blue-800">
-            Bugs Fixed: {bugsFixed}
-          </div>
+        </div>
+        
+        <div className="px-3 py-1 text-sm font-medium rounded-full bg-blue-100 text-blue-800 self-start mb-4">
+          Bugs Fixed: {bugsFixed}
         </div>
       </div>
-      <div className="whitespace-pre-wrap text-gray-500">
+      
+      <div className="whitespace-pre-wrap text-gray-600 text-sm">
         {content}
       </div>
     </div>
