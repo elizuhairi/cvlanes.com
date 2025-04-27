@@ -530,6 +530,100 @@ const HomePage = () => {
         </div>
       </motion.section>
 
+      {/* Testimonials Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="py-20 bg-black/5 relative overflow-hidden"
+      >
+        <div className="container mx-auto px-4">
+          <motion.h3 
+            className="text-3xl font-bold mb-12 text-center"
+            animate={{ 
+              textShadow: ["0 0 0px rgba(0,0,0,0)", "0 0 15px rgba(56, 189, 248, 0.5)", "0 0 0px rgba(0,0,0,0)"] 
+            }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+          >
+            Client Testimonials
+          </motion.h3>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Testimonial 1 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.02 }}
+              className="theme-card relative overflow-hidden p-6"
+            >
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-tr from-cyan-500/20 to-fuchsia-600/20 flex items-center justify-center">
+                    <span className="text-2xl font-bold text-primary">CB</span>
+                  </div>
+                </div>
+                <div className="flex-grow">
+                  <div className="mb-4 text-primary/40">
+                    <Icon name="quote" className="text-3xl" />
+                  </div>
+                  <p className="text-theme-text/80 mb-4 leading-relaxed">
+                    Ali is an exceptional and experienced UI/UX designer with more than ten years of professional experience specialising in product design for technology companies. Ali believes that design is not about deliverables and beautiful pixels but about solving problems and achieving business and user goals. As a product designer, Ali focuses on usability, user experience, and user research in his designs. He has worked with small and large teams as well as a freelancer and enjoys the challenge of solving user problems. He always delivers on time and on budget.
+                  </p>
+                  <div className="mt-4">
+                    <div className="font-medium text-primary">Constantin Buda</div>
+                    <div className="text-sm text-theme-text/60">CMO at Vidalico Digital | Hubspot Agency Partner | SicTic Member</div>
+                  </div>
+                </div>
+              </div>
+              <motion.div 
+                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-fuchsia-600"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              />
+            </motion.div>
+            
+            {/* Testimonial 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.02 }}
+              className="theme-card relative overflow-hidden p-6"
+            >
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-tr from-fuchsia-600/20 to-cyan-500/20 flex items-center justify-center">
+                    <span className="text-2xl font-bold text-primary">FM</span>
+                  </div>
+                </div>
+                <div className="flex-grow">
+                  <div className="mb-4 text-primary/40">
+                    <Icon name="quote" className="text-3xl" />
+                  </div>
+                  <p className="text-theme-text/80 mb-4 leading-relaxed">
+                    Ali is a creative product designer. You will find a lot of artists with too busy layouts and art forms. But Ali takes a lead in impressive yet simple and relevant product designs. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression. I've worked with Ali in past and it was truly a fun experience. Would love to do that again and I highly recommend Ali too.
+                  </p>
+                  <div className="mt-4">
+                    <div className="font-medium text-primary">Fahad M</div>
+                    <div className="text-sm text-theme-text/60">IT Contractor | Travelodge Hotels Limited</div>
+                  </div>
+                </div>
+              </div>
+              <motion.div 
+                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-fuchsia-600 to-cyan-500"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              />
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Additional Info with 3D cards */}
       <motion.section 
         initial={{ opacity: 0 }}
