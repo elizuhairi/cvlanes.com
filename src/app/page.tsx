@@ -7,6 +7,7 @@ import Card from '@/components/Card';
 import CardContent from '@/components/CardContent';
 import type { HeroConfig } from '@/types/hero';
 import QuoteBlock from "@/components/ui/QuoteBlock";
+import Link from 'next/link';
 
 // Icon component for simple SVG icons
 const Icon = ({ name, className = "" }: { name: string, className?: string }) => {
@@ -603,7 +604,7 @@ const HomePage = () => {
                     <Icon name="quote" className="text-3xl" />
                   </div>
                   <p className="text-theme-text/80 mb-4 leading-relaxed">
-                    Ali is a creative product designer. You will find a lot of artists with too busy layouts and art forms. But Ali takes a lead in impressive yet simple and relevant product designs. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression. I've worked with Ali in past and it was truly a fun experience. Would love to do that again and I highly recommend Ali too.
+                    Ali is a creative product designer. You will find a lot of artists with too busy layouts and art forms. But Ali takes a lead in impressive yet simple and relevant product designs. He has this cunning ability to solve complex problem with simple solutions using his design skills. His arts speaks visually, does the job perfectly and leaves a long lasting impression. I&apos;ve worked with Ali in past and it was truly a fun experience. Would love to do that again and I highly recommend Ali too.
                   </p>
                   <div className="mt-4">
                     <div className="font-medium text-primary">Fahad M</div>
@@ -700,13 +701,13 @@ const HomePage = () => {
                     </button>
                   </li>
                   <li>
-                    <a 
-                      href="/blog" 
+                    <Link 
+                      href="/blog"
                       className="text-blue-500 hover:text-blue-600 hover:underline transition-colors duration-300 flex items-center w-full cursor-pointer"
                     >
                       <Icon name="article" className="mr-2" />
                       Blog insights and updates
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 <div className="absolute -bottom-4 -right-8 opacity-20 w-20 h-20">
@@ -864,30 +865,5 @@ const SocialMediaButton = ({ icon, url, label }: { icon: string, url: string, la
   );
 };
 
-// Helper function to get icon name
-const getSocialIconName = (platform: string): string => {
-  return platform;
-};
-
-// Testimonial Card Component
-const TestimonialCard = ({ quote, author, position }: { quote: string, author: string, position: string }) => {
-  return (
-    <motion.div 
-      className="p-4 rounded-lg bg-theme/80 shadow-sm border border-primary/10"
-      whileHover={{ scale: 1.02 }}
-    >
-      <div className="flex">
-        <div className="mr-2 text-primary/40">
-          <Icon name="quote" className="text-3xl" />
-        </div>
-        <div>
-          <p className="font-light italic text-theme-text/80 mb-4">{quote}</p>
-          <div className="font-medium text-primary">{author}</div>
-          <div className="text-sm text-theme-text/60">{position}</div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
 
 export default HomePage;
