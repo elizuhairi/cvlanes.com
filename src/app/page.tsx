@@ -224,7 +224,6 @@ const HomePage = () => {
   
   // Popup states
   const [socialMediaPopupOpen, setSocialMediaPopupOpen] = useState(false);
-  const [testimonialsPopupOpen, setTestimonialsPopupOpen] = useState(false);
   
   // Ref for the Work Experience section
   const workExperienceRef = useRef<HTMLElement>(null);
@@ -701,17 +700,6 @@ const HomePage = () => {
                     </button>
                   </li>
                   <li>
-                    <button 
-                      onClick={() => setTestimonialsPopupOpen(true)}
-                      className="text-blue-500 hover:text-blue-600 hover:underline transition-colors duration-300 flex items-center w-full text-left cursor-pointer"
-                      role="link"
-                      aria-haspopup="dialog"
-                    >
-                      <Icon name="quote" className="mr-2" />
-                      Recommendations and testimonials
-                    </button>
-                  </li>
-                  <li>
                     <a 
                       href="/blog" 
                       className="text-blue-500 hover:text-blue-600 hover:underline transition-colors duration-300 flex items-center w-full cursor-pointer"
@@ -745,27 +733,6 @@ const HomePage = () => {
           </ThemePopup>
         )}
         
-        {testimonialsPopupOpen && (
-          <ThemePopup onClose={() => setTestimonialsPopupOpen(false)} title="Testimonials">
-            <div className="space-y-6 max-h-[60vh] overflow-y-auto">
-              <TestimonialCard 
-                quote="Ali's design approach is both innovative and user-centered. His work on our platform transformed the user experience completely."
-                author="Jane Smith"
-                position="Product Manager, TechCorp"
-              />
-              <TestimonialCard 
-                quote="Working with Ali was a game-changer for our startup. His ability to translate complex ideas into intuitive interfaces is remarkable."
-                author="John Doe"
-                position="CEO, StartupX"
-              />
-              <TestimonialCard 
-                quote="Ali brings a unique perspective to design challenges. His solutions are not just beautiful but also highly functional."
-                author="Sarah Johnson"
-                position="Design Director, CreativeLabs"
-              />
-            </div>
-          </ThemePopup>
-        )}
       </AnimatePresence>
 
       {/* Interactive footer with glowing effect */}
